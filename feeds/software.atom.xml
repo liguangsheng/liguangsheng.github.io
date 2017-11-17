@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog - Software</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/software.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-07-03T00:00:00+08:00</updated><entry><title>git笔记</title><link href="http://liguangsheng.github.io/gitbi-ji.html" rel="alternate"></link><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-03:/gitbi-ji.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
+git clone &amp;lt;url&amp;gt; &amp;lt;localpath&amp;gt;
+
+# 查看分支
+git branch
+
+# 查看所有分支
+git branch -a
+
+# 切换分支
+git checkout &amp;lt;branch_name&amp;gt;
+
+# 创建并切换分支
+git checkout -b &amp;lt;branch_name&amp;gt;
+
+# 添加文件到暂存区
+git add &amp;lt;filename&amp;gt;
+
+# 添加所有文件到暂存区
+git add --all
+
+# 提交修改
+git commit -m &amp;quot;&amp;lt;comment&amp;gt;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;暂存&lt;/h1&gt;
+&lt;p&gt;stash 操作是栈式的操作。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将当前修改暂存起来
+git stash
+
+# 列出当前stash栈
+git stash list
+
+# 查看stash详情
+git stash show
+
+# 丢弃stash
+git …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
+git clone &amp;lt;url&amp;gt; &amp;lt;localpath&amp;gt;
+
+# 查看分支
+git branch
+
+# 查看所有分支
+git branch -a
+
+# 切换分支
+git checkout &amp;lt;branch_name&amp;gt;
+
+# 创建并切换分支
+git checkout -b &amp;lt;branch_name&amp;gt;
+
+# 添加文件到暂存区
+git add &amp;lt;filename&amp;gt;
+
+# 添加所有文件到暂存区
+git add --all
+
+# 提交修改
+git commit -m &amp;quot;&amp;lt;comment&amp;gt;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;暂存&lt;/h1&gt;
+&lt;p&gt;stash 操作是栈式的操作。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将当前修改暂存起来
+git stash
+
+# 列出当前stash栈
+git stash list
+
+# 查看stash详情
+git stash show
+
+# 丢弃stash
+git stash drop
+
+# 将先前的暂存的状态恢复出来
+git stash pop | apply
+
+# 清空暂存的状态
+git stash clear
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改commit&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 合并commit
+git rebase -i
+&lt;/pre&gt;&lt;/div&gt;</content><category term="git"></category></entry><entry><title>搭建git服务器</title><link href="http://liguangsheng.github.io/da-jian-gitfu-wu-qi.html" rel="alternate"></link><published>2017-06-28T00:00:00+08:00</published><updated>2017-06-28T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-06-28:/da-jian-gitfu-wu-qi.html</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装git
+ &lt;code&gt;yum install git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加用户git并切换到git用户来运行git服务
+ &lt;code&gt;useradd git
+ passwd git
+ su git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建相应的ssh目录
+ &lt;code&gt;mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh
+ touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到一个空的目录来存放git仓库
+ &lt;code&gt;mkdir -p /opt/git/project.git
+ cd /opt/git
+ chown -R git:git project.git
+ cd project.git
+ git init --bare&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁用shell登录，将&lt;code&gt;/etc/passwd …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装git
+ &lt;code&gt;yum install git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加用户git并切换到git用户来运行git服务
+ &lt;code&gt;useradd git
+ passwd git
+ su git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建相应的ssh目录
+ &lt;code&gt;mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh
+ touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到一个空的目录来存放git仓库
+ &lt;code&gt;mkdir -p /opt/git/project.git
+ cd /opt/git
+ chown -R git:git project.git
+ cd project.git
+ git init --bare&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁用shell登录，将&lt;code&gt;/etc/passwd&lt;/code&gt;中的
+ &lt;code&gt;git:x:1001:1001:,,,:/home/git:/bin/bash&lt;/code&gt;
+ 改为
+ &lt;code&gt;git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;赋予使用者权限，将授权使用git的ssh公钥收集到&lt;code&gt;~/.ssh/authorizes_keys&lt;/code&gt;中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用git
+ &lt;code&gt;git clone git@&amp;lt;server_address&amp;gt;:/opt/git/project.git
+ Cloning into 'project'...
+ warning: You appear to have cloned an empty repository.&lt;/code&gt;
+ &lt;code&gt;git clone ssh://&amp;lt;user&amp;gt;@&amp;lt;server&amp;gt;:&amp;lt;port&amp;gt;&amp;lt;path&amp;gt;
+ git clone ssh://root@xxx.xxx.xxx.xxx:28802/opt/git/proje ct.git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="git"></category><category term="centos"></category></entry><entry><title>编译安装emacs25</title><link href="http://liguangsheng.github.io/bian-yi-an-zhuang-emacs25.html" rel="alternate"></link><published>2017-05-05T17:37:00+08:00</published><updated>2017-06-15T17:45:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-05-05:/bian-yi-an-zhuang-emacs25.html</id><summary type="html">&lt;h1&gt;下载源码并解压&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz
+tar xzvf emacs-25.2.tar.gz
+cd emacs-25.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装编译依赖&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo  libjpeg-turbo-devel giflib giflib-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;编译&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./configure --prefix=/usr/local/emacs-25
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;make时出现了&lt;code&gt;aclocal-1.5.1 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;下载源码并解压&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz
+tar xzvf emacs-25.2.tar.gz
+cd emacs-25.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装编译依赖&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo  libjpeg-turbo-devel giflib giflib-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;编译&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./configure --prefix=/usr/local/emacs-25
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;make时出现了&lt;code&gt;aclocal-1.5.1 missing&lt;/code&gt;的错误，执行&lt;code&gt;autoreconf -f -i&lt;/code&gt;后再make。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;make install&lt;/code&gt;时出现&lt;code&gt;makeinfo command not found&lt;/code&gt;，执行&lt;code&gt;yum install texinfo&lt;/code&gt;。&lt;/p&gt;</content><category term="centos"></category><category term="emacs"></category></entry><entry><title>MacType与VirtualBox冲突</title><link href="http://liguangsheng.github.io/mactypeyu-virtualboxchong-tu.html" rel="alternate"></link><published>2017-01-12T15:45:00+08:00</published><updated>2017-06-15T17:52:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-01-12:/mactypeyu-virtualboxchong-tu.html</id><summary type="html">&lt;p&gt;MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。&lt;/p&gt;
+&lt;h2&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;在MacType的配置文件中加入以下节点&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[ExcludeSub] 
+javaw.exe 
+vbox-img.exe
+VBoxBalloonCtrl.exe
+VBoxDTrace.exe
+VBoxExtPackHelperApp.exe
+VBoxHeadless.exe
+VBoxManage.exe
+VBoxNetDHCP.exe
+VBoxNetNAT.exe
+VBoxSDL.exe
+VBoxSVC.exe
+VBoxTestOGL.exe
+VBoxWebSrv.exe
+VirtualBox.exe
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。&lt;/p&gt;
+&lt;h2&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;在MacType的配置文件中加入以下节点&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[ExcludeSub] 
+javaw.exe 
+vbox-img.exe
+VBoxBalloonCtrl.exe
+VBoxDTrace.exe
+VBoxExtPackHelperApp.exe
+VBoxHeadless.exe
+VBoxManage.exe
+VBoxNetDHCP.exe
+VBoxNetNAT.exe
+VBoxSDL.exe
+VBoxSVC.exe
+VBoxTestOGL.exe
+VBoxWebSrv.exe
+VirtualBox.exe
+&lt;/pre&gt;&lt;/div&gt;</content><category term="mactype"></category><category term="virtualbox"></category></entry></feed>

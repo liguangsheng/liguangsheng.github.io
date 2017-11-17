@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog - Python</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/python.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-11-11T00:00:00+08:00</updated><entry><title>pyenv管理Python版本</title><link href="http://liguangsheng.github.io/pyenvguan-li-pythonban-ben.html" rel="alternate"></link><published>2017-03-19T00:00:00+08:00</published><updated>2017-11-11T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-19:/pyenvguan-li-pythonban-ben.html</id><summary type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;添加以下语句到.bashrc并重新source。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot;
+eval &amp;quot;$(pyenv init -)&amp;quot;
+eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行一下&lt;code&gt;pyenv update&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;依赖&lt;/h2&gt;
+&lt;p&gt;编译Python时需要一些依赖。
+Ubuntu/Debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;添加以下语句到.bashrc并重新source。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot;
+eval &amp;quot;$(pyenv init -)&amp;quot;
+eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行一下&lt;code&gt;pyenv update&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;依赖&lt;/h2&gt;
+&lt;p&gt;编译Python时需要一些依赖。
+Ubuntu/Debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Fedora/CentOS/RHEL:
+FIXME: you may need to install xz to build some CPython version&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Mac OS X:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install readline xz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: libssl-dev is required when compiling Python, installing libssl-dev will actually install zlib1g-dev, which leads to uninstall and re-install Python versions (installed before installing libssl-dev). On Redhat and derivatives the package is named openssl-devel.&lt;/p&gt;
+&lt;h2&gt;pyenv命令&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 列出所有可用的命令
+pyenv commands
+
+# 更新pyenv
+pyenv update
+
+# 查看当前所有的python版本
+pyenv versions 
+
+# 查看当前激活的python版本
+pyenv version
+
+# 安装指定版本的python
+pyenv install -v [version] 
+
+# 卸载指定版本的python
+pyenv uninstall -v [version]
+
+# 为所有已安装的可执行文件创建 shims，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令
+pyenv rehash
+
+# 指定全局python版本
+pyenv global [version]
+
+# 指定本地面向应用程序的python版本
+pyenv local [version]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;pyenv与virtualenv配合&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 新建一个virtualenv
+pyenv virtualenv [version] [venv_name]
+
+# 激活一个virtualenv
+pyenv activate [venv_name]
+
+# 退出virtualenv环境
+pyenv deactivate
+
+# 删除一个virtualenv环境
+pyenv uninstall [venv_name]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过pyenv建立的虚拟环境都在&lt;code&gt;~/.pyenv/versions&lt;/code&gt;下，不会出现在应用目录里面&lt;/p&gt;
+&lt;h2&gt;遇到的问题&lt;/h2&gt;
+&lt;h3&gt;pyenv安装新版本时，默认的源速度比较慢&lt;/h3&gt;
+&lt;p&gt;选择国内的镜像站（比如mirrors.sohu.com），手动下载python包，放到&lt;code&gt;~/.pyenv/cache&lt;/code&gt;目录下，再安装时会用cache下的包安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;version=2.7.13 &amp;amp;&amp;amp; wget http://mirrors.sohu.com/python/$version/Python-$version.tar.xz -P ~/.pyenv/cache &amp;amp;&amp;amp; pyenv install -v $version
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="version"></category></entry></feed>

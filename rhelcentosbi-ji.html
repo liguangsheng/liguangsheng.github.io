@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>rhel/centos笔记</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="rhelcentosbi-ji.html">rhel/centos笔记</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-07-13 00:00:00+08:00" content="2017-07-13 00:00:00+08:00">2017-07-13</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/linux.html" itemprop="url" rel="index">
+                		<span>Linux</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/linux.html" itemprop="url" rel="index">
+                		<span>linux</span>
+                	</a>
+                	# <a href="tag/rhel.html" itemprop="url" rel="index">
+                		<span>rhel</span>
+                	</a>
+                	# <a href="tag/centos.html" itemprop="url" rel="index">
+                		<span>centos</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<h2><strong>OS: CentOS 6.8 | RHEL 6.5 </strong></h2>
+<h1>VirtualBox中为系统安装增强功能包</h1>
+<p>安装增强功能包需要依赖一些工具包，装上就好</p>
+<div class="highlight"><pre><span></span>sudo yum install -y gcc gcc-c++ make kernel kernel-devel
+</pre></div>
+
+
+<h1>VirtualBox共享文件夹</h1>
+<p>在设置中，为虚拟机分配一个共享文件夹，勾选固定分配。
+在虚拟机中执行以下命令挂载共享文件夹。</p>
+<div class="highlight"><pre><span></span>sudo mkdir /mnt/vmshare # 创建共享文件夹挂载点
+sudo mount -t vboxsf vmshare /mnt/vmshare # 挂载
+</pre></div>
+
+
+<h1>修改主机名(hostname)</h1>
+<div class="highlight"><pre><span></span>vim /etc/sysconfig/network
+
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=&lt;your hostname&gt; # 修改这里
+</pre></div>
+
+
+<h1>安装epel扩展</h1>
+<div class="highlight"><pre><span></span>yum intsall epel-release -y
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>

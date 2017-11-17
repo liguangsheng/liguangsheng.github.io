@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>linux备份与恢复</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="linuxbei-fen-yu-hui-fu.html">linux备份与恢复</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-03-20 00:00:00+08:00" content="2017-03-20 00:00:00+08:00">2017-03-20</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/linux.html" itemprop="url" rel="index">
+                		<span>Linux</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/linux.html" itemprop="url" rel="index">
+                		<span>linux</span>
+                	</a>
+                	# <a href="tag/backup.html" itemprop="url" rel="index">
+                		<span>backup</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<h2>tar</h2>
+<div class="highlight"><pre><span></span># 备份系统
+cd /
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys /  
+
+# 恢复系统
+tar xvpfz backup.tgz -C /
+# 创建备份时跳过的文件夹
+mkdir proc
+mkdir mnt
+mkdir sys
+mkdir lost+found
+</pre></div>
+
+
+<h2>dd</h2>
+<div class="highlight"><pre><span></span># 在livecd中操作
+# 备份系统
+dd if=/dev/sdax of=~/archlinux.backup
+，在livecd中
+dd if=archlinux.backup of=/dev/sdax
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/all.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-11-11T00:00:00+08:00</updated><entry><title>常用linux命令</title><link href="http://liguangsheng.github.io/chang-yong-linuxming-ling.html" rel="alternate"></link><published>2017-07-21T00:00:00+08:00</published><updated>2017-07-21T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-21:/chang-yong-linuxming-ling.html</id><summary type="html">&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ssh登陆
+# ssh user@host -p port
+ssh lgs@localhost -p 9922
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;scp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 上传文件
+# scp -P port /path/to/local user@host:/path/to/remote
+scp -P 9922 d:\tmp\test.py lgs@localhost:/tmp/test.py
+
+# 上传文件夹
+# scp -r -P port /path/to/local user@host:/path/to/remote …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ssh登陆
+# ssh user@host -p port
+ssh lgs@localhost -p 9922
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;scp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 上传文件
+# scp -P port /path/to/local user@host:/path/to/remote
+scp -P 9922 d:\tmp\test.py lgs@localhost:/tmp/test.py
+
+# 上传文件夹
+# scp -r -P port /path/to/local user@host:/path/to/remote
+scp -r -P 9922 d:\tmp\test\ lgs@localhost:/tmp/test/
+
+# 下载文件
+scp -P 9922 lgs@localhost:/tmp/test.py d:\tmp\test.py 
+
+# 下载文件夹
+scp -r -P 9922 lgs@localhost:/tmp/test/ d:\tmp\test\
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;进程&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ctrl-z # 挂起当前进程到后台
+bg # 查看后台进程
+bg [id] # 后台运行进程
+fg [id] # 将进程切到前台运行
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;查找文件&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find &amp;lt;path&amp;gt; -name &amp;quot;*xxx*&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;统计行数&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -name &amp;quot;*.py&amp;quot;|xargs cat|wc -l
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;OpenSSH&lt;/h2&gt;
+&lt;p&gt;openssh 要求密码，提示&lt;code&gt;passphrase length hidden intenationlly&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id localhost
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category></entry><entry><title>rhel/centos笔记</title><link href="http://liguangsheng.github.io/rhelcentosbi-ji.html" rel="alternate"></link><published>2017-07-13T00:00:00+08:00</published><updated>2017-07-13T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-13:/rhelcentosbi-ji.html</id><summary type="html">&lt;h2&gt;&lt;strong&gt;OS: CentOS 6.8 | RHEL 6.5 &lt;/strong&gt;&lt;/h2&gt;
+&lt;h1&gt;VirtualBox中为系统安装增强功能包&lt;/h1&gt;
+&lt;p&gt;安装增强功能包需要依赖一些工具包，装上就好&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install -y gcc gcc-c++ make kernel kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;VirtualBox共享文件夹&lt;/h1&gt;
+&lt;p&gt;在设置中，为虚拟机分配一个共享文件夹，勾选固定分配。
+在虚拟机中执行以下命令挂载共享文件夹。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /mnt/vmshare # 创建共享文件夹挂载点
+sudo mount -t vboxsf vmshare /mnt/vmshare # 挂载
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改主机名(hostname)&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vim /etc/sysconfig/network
+
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=&amp;lt;your hostname …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;&lt;strong&gt;OS: CentOS 6.8 | RHEL 6.5 &lt;/strong&gt;&lt;/h2&gt;
+&lt;h1&gt;VirtualBox中为系统安装增强功能包&lt;/h1&gt;
+&lt;p&gt;安装增强功能包需要依赖一些工具包，装上就好&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install -y gcc gcc-c++ make kernel kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;VirtualBox共享文件夹&lt;/h1&gt;
+&lt;p&gt;在设置中，为虚拟机分配一个共享文件夹，勾选固定分配。
+在虚拟机中执行以下命令挂载共享文件夹。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /mnt/vmshare # 创建共享文件夹挂载点
+sudo mount -t vboxsf vmshare /mnt/vmshare # 挂载
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改主机名(hostname)&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vim /etc/sysconfig/network
+
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=&amp;lt;your hostname&amp;gt; # 修改这里
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装epel扩展&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum intsall epel-release -y
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="rhel"></category><category term="centos"></category></entry><entry><title>git笔记</title><link href="http://liguangsheng.github.io/gitbi-ji.html" rel="alternate"></link><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-03:/gitbi-ji.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
+git clone &amp;lt;url&amp;gt; &amp;lt;localpath&amp;gt;
+
+# 查看分支
+git branch
+
+# 查看所有分支
+git branch -a
+
+# 切换分支
+git checkout &amp;lt;branch_name&amp;gt;
+
+# 创建并切换分支
+git checkout -b &amp;lt;branch_name&amp;gt;
+
+# 添加文件到暂存区
+git add &amp;lt;filename&amp;gt;
+
+# 添加所有文件到暂存区
+git add --all
+
+# 提交修改
+git commit -m &amp;quot;&amp;lt;comment&amp;gt;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;暂存&lt;/h1&gt;
+&lt;p&gt;stash 操作是栈式的操作。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将当前修改暂存起来
+git stash
+
+# 列出当前stash栈
+git stash list
+
+# 查看stash详情
+git stash show
+
+# 丢弃stash
+git …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
+git clone &amp;lt;url&amp;gt; &amp;lt;localpath&amp;gt;
+
+# 查看分支
+git branch
+
+# 查看所有分支
+git branch -a
+
+# 切换分支
+git checkout &amp;lt;branch_name&amp;gt;
+
+# 创建并切换分支
+git checkout -b &amp;lt;branch_name&amp;gt;
+
+# 添加文件到暂存区
+git add &amp;lt;filename&amp;gt;
+
+# 添加所有文件到暂存区
+git add --all
+
+# 提交修改
+git commit -m &amp;quot;&amp;lt;comment&amp;gt;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;暂存&lt;/h1&gt;
+&lt;p&gt;stash 操作是栈式的操作。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将当前修改暂存起来
+git stash
+
+# 列出当前stash栈
+git stash list
+
+# 查看stash详情
+git stash show
+
+# 丢弃stash
+git stash drop
+
+# 将先前的暂存的状态恢复出来
+git stash pop | apply
+
+# 清空暂存的状态
+git stash clear
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改commit&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 合并commit
+git rebase -i
+&lt;/pre&gt;&lt;/div&gt;</content><category term="git"></category></entry><entry><title>搭建git服务器</title><link href="http://liguangsheng.github.io/da-jian-gitfu-wu-qi.html" rel="alternate"></link><published>2017-06-28T00:00:00+08:00</published><updated>2017-06-28T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-06-28:/da-jian-gitfu-wu-qi.html</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装git
+ &lt;code&gt;yum install git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加用户git并切换到git用户来运行git服务
+ &lt;code&gt;useradd git
+ passwd git
+ su git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建相应的ssh目录
+ &lt;code&gt;mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh
+ touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到一个空的目录来存放git仓库
+ &lt;code&gt;mkdir -p /opt/git/project.git
+ cd /opt/git
+ chown -R git:git project.git
+ cd project.git
+ git init --bare&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁用shell登录，将&lt;code&gt;/etc/passwd …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装git
+ &lt;code&gt;yum install git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加用户git并切换到git用户来运行git服务
+ &lt;code&gt;useradd git
+ passwd git
+ su git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建相应的ssh目录
+ &lt;code&gt;mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh
+ touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换到一个空的目录来存放git仓库
+ &lt;code&gt;mkdir -p /opt/git/project.git
+ cd /opt/git
+ chown -R git:git project.git
+ cd project.git
+ git init --bare&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁用shell登录，将&lt;code&gt;/etc/passwd&lt;/code&gt;中的
+ &lt;code&gt;git:x:1001:1001:,,,:/home/git:/bin/bash&lt;/code&gt;
+ 改为
+ &lt;code&gt;git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;赋予使用者权限，将授权使用git的ssh公钥收集到&lt;code&gt;~/.ssh/authorizes_keys&lt;/code&gt;中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用git
+ &lt;code&gt;git clone git@&amp;lt;server_address&amp;gt;:/opt/git/project.git
+ Cloning into 'project'...
+ warning: You appear to have cloned an empty repository.&lt;/code&gt;
+ &lt;code&gt;git clone ssh://&amp;lt;user&amp;gt;@&amp;lt;server&amp;gt;:&amp;lt;port&amp;gt;&amp;lt;path&amp;gt;
+ git clone ssh://root@xxx.xxx.xxx.xxx:28802/opt/git/proje ct.git&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="git"></category><category term="centos"></category></entry><entry><title>编译安装emacs25</title><link href="http://liguangsheng.github.io/bian-yi-an-zhuang-emacs25.html" rel="alternate"></link><published>2017-05-05T17:37:00+08:00</published><updated>2017-06-15T17:45:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-05-05:/bian-yi-an-zhuang-emacs25.html</id><summary type="html">&lt;h1&gt;下载源码并解压&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz
+tar xzvf emacs-25.2.tar.gz
+cd emacs-25.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装编译依赖&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo  libjpeg-turbo-devel giflib giflib-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;编译&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./configure --prefix=/usr/local/emacs-25
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;make时出现了&lt;code&gt;aclocal-1.5.1 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;下载源码并解压&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz
+tar xzvf emacs-25.2.tar.gz
+cd emacs-25.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装编译依赖&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo  libjpeg-turbo-devel giflib giflib-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;编译&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./configure --prefix=/usr/local/emacs-25
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;make时出现了&lt;code&gt;aclocal-1.5.1 missing&lt;/code&gt;的错误，执行&lt;code&gt;autoreconf -f -i&lt;/code&gt;后再make。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;make install&lt;/code&gt;时出现&lt;code&gt;makeinfo command not found&lt;/code&gt;，执行&lt;code&gt;yum install texinfo&lt;/code&gt;。&lt;/p&gt;</content><category term="centos"></category><category term="emacs"></category></entry><entry><title>linux配置Shadowsocks</title><link href="http://liguangsheng.github.io/linuxpei-zhi-shadowsocks.html" rel="alternate"></link><published>2017-04-06T00:00:00+08:00</published><updated>2017-04-06T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-04-06:/linuxpei-zhi-shadowsocks.html</id><summary type="html">&lt;h2&gt;安装Shadowsocks&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install shadowsocks
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;服务端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，shadowsocks.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -c shadowsocks.json -d start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;关闭ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -d stop
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;客户端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，/etc/shadowsocks/config.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;安装Shadowsocks&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install shadowsocks
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;服务端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，shadowsocks.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -c shadowsocks.json -d start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;关闭ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -d stop
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;客户端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，/etc/shadowsocks/config.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动shadowsocks客户端&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sslocal -c /etc/shadowsocks/config.json -d start
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="shadowsocks"></category></entry><entry><title>linux备份与恢复</title><link href="http://liguangsheng.github.io/linuxbei-fen-yu-hui-fu.html" rel="alternate"></link><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-20:/linuxbei-fen-yu-hui-fu.html</id><summary type="html">&lt;h2&gt;tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 备份系统
+cd /
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys /  
+
+# 恢复系统
+tar xvpfz backup.tgz -C /
+# 创建备份时跳过的文件夹
+mkdir proc
+mkdir mnt
+mkdir sys
+mkdir lost+found
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;dd&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 在livecd中操作
+# 备份系统
+dd if=/dev/sdax of=~/archlinux.backup
+，在livecd中
+dd if=archlinux.backup …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 备份系统
+cd /
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys /  
+
+# 恢复系统
+tar xvpfz backup.tgz -C /
+# 创建备份时跳过的文件夹
+mkdir proc
+mkdir mnt
+mkdir sys
+mkdir lost+found
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;dd&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 在livecd中操作
+# 备份系统
+dd if=/dev/sdax of=~/archlinux.backup
+，在livecd中
+dd if=archlinux.backup of=/dev/sdax
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="backup"></category></entry><entry><title>pyenv管理Python版本</title><link href="http://liguangsheng.github.io/pyenvguan-li-pythonban-ben.html" rel="alternate"></link><published>2017-03-19T00:00:00+08:00</published><updated>2017-11-11T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-19:/pyenvguan-li-pythonban-ben.html</id><summary type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;添加以下语句到.bashrc并重新source。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot;
+eval &amp;quot;$(pyenv init -)&amp;quot;
+eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行一下&lt;code&gt;pyenv update&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;依赖&lt;/h2&gt;
+&lt;p&gt;编译Python时需要一些依赖。
+Ubuntu/Debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;安装&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;添加以下语句到.bashrc并重新source。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot;
+eval &amp;quot;$(pyenv init -)&amp;quot;
+eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行一下&lt;code&gt;pyenv update&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;依赖&lt;/h2&gt;
+&lt;p&gt;编译Python时需要一些依赖。
+Ubuntu/Debian:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Fedora/CentOS/RHEL:
+FIXME: you may need to install xz to build some CPython version&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Mac OS X:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install readline xz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: libssl-dev is required when compiling Python, installing libssl-dev will actually install zlib1g-dev, which leads to uninstall and re-install Python versions (installed before installing libssl-dev). On Redhat and derivatives the package is named openssl-devel.&lt;/p&gt;
+&lt;h2&gt;pyenv命令&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 列出所有可用的命令
+pyenv commands
+
+# 更新pyenv
+pyenv update
+
+# 查看当前所有的python版本
+pyenv versions 
+
+# 查看当前激活的python版本
+pyenv version
+
+# 安装指定版本的python
+pyenv install -v [version] 
+
+# 卸载指定版本的python
+pyenv uninstall -v [version]
+
+# 为所有已安装的可执行文件创建 shims，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令
+pyenv rehash
+
+# 指定全局python版本
+pyenv global [version]
+
+# 指定本地面向应用程序的python版本
+pyenv local [version]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;pyenv与virtualenv配合&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 新建一个virtualenv
+pyenv virtualenv [version] [venv_name]
+
+# 激活一个virtualenv
+pyenv activate [venv_name]
+
+# 退出virtualenv环境
+pyenv deactivate
+
+# 删除一个virtualenv环境
+pyenv uninstall [venv_name]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过pyenv建立的虚拟环境都在&lt;code&gt;~/.pyenv/versions&lt;/code&gt;下，不会出现在应用目录里面&lt;/p&gt;
+&lt;h2&gt;遇到的问题&lt;/h2&gt;
+&lt;h3&gt;pyenv安装新版本时，默认的源速度比较慢&lt;/h3&gt;
+&lt;p&gt;选择国内的镜像站（比如mirrors.sohu.com），手动下载python包，放到&lt;code&gt;~/.pyenv/cache&lt;/code&gt;目录下，再安装时会用cache下的包安装。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;version=2.7.13 &amp;amp;&amp;amp; wget http://mirrors.sohu.com/python/$version/Python-$version.tar.xz -P ~/.pyenv/cache &amp;amp;&amp;amp; pyenv install -v $version
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="pyenv"></category><category term="version"></category></entry><entry><title>ubuntu笔记</title><link href="http://liguangsheng.github.io/ubuntubi-ji.html" rel="alternate"></link><published>2017-03-17T00:00:00+08:00</published><updated>2017-03-17T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-17:/ubuntubi-ji.html</id><summary type="html">&lt;p&gt;OS: Ubuntu 16.04 xenial
+Kernel: x86_64 Linux 4.4.0-xx-generic&lt;/p&gt;
+&lt;h2&gt;启动:text mode or GUI&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 禁用GUI，启动到text mode
+sudo systemctl disable display-manager.service
+# 启用GUI
+sudo systemctl enable display-manager.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;ssh服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install openssh-server # 安装ssh服务
+sudo systemctl start sshd.service # 启动ssh服务
+sudo systemctl enable sshd.service # 开机自启动
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;OS: Ubuntu 16.04 xenial
+Kernel: x86_64 Linux 4.4.0-xx-generic&lt;/p&gt;
+&lt;h2&gt;启动:text mode or GUI&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 禁用GUI，启动到text mode
+sudo systemctl disable display-manager.service
+# 启用GUI
+sudo systemctl enable display-manager.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;ssh服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install openssh-server # 安装ssh服务
+sudo systemctl start sshd.service # 启动ssh服务
+sudo systemctl enable sshd.service # 开机自启动
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install zsh
+sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;emacs25&lt;/h2&gt;
+&lt;p&gt;通过ppa安装emacs25&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# through ppa
+sudo add-apt-repository ppa:alexmurray/emacs
+sudo apt-get update
+sudo apt-get install emacs25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过源代码编译安装emacs&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# through source code
+sudo apt install build-essential checkinstall
+sudo apt-get build-dep emacs24
+
+wget http://ftp.gnu.org/gnu/emacs/emacs-25.1.tar.gz
+tar xzvf emacs-25.1.tar.gz
+cd emacs-25.1
+./configure
+make
+sudo checkinstall
+
+# 删除emacs25
+sudo dpkg -r emacs-25
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>linux压缩与解压</title><link href="http://liguangsheng.github.io/linuxya-suo-yu-jie-ya.html" rel="alternate"></link><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-02-27:/linuxya-suo-yu-jie-ya.html</id><summary type="html">&lt;h2&gt;.tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将foobar打包为/tmp/foobar.tar
+tar cvf /tmp/foobar.tar foobar/
+
+# 将/tmp/foobar.tar解包为foobar
+tar xvf /tmp/foobar.tar
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.gz | .tgz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以gzip方式压缩
+tar zcvf /tmp/foobar.tar.gz foobar/
+
+# 解压
+tar zxvf /tmp/foobar.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.bz2&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以bzip2方式压缩
+tar jcvf /tmp/foobar.tar.bz2 foobar/
+
+# 解压
+tar …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;.tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将foobar打包为/tmp/foobar.tar
+tar cvf /tmp/foobar.tar foobar/
+
+# 将/tmp/foobar.tar解包为foobar
+tar xvf /tmp/foobar.tar
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.gz | .tgz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以gzip方式压缩
+tar zcvf /tmp/foobar.tar.gz foobar/
+
+# 解压
+tar zxvf /tmp/foobar.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.bz2&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以bzip2方式压缩
+tar jcvf /tmp/foobar.tar.bz2 foobar/
+
+# 解压
+tar jxvf /tmp/foobar.tar.bz2 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.zip&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 压缩文件夹
+zip -r /tmp/foobar.zip foobar/
+
+# 压缩文件
+zip foo.zip foo
+
+# 解压
+unzip /tmp/foobar.zip
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="tar"></category></entry><entry><title>archlinux笔记</title><link href="http://liguangsheng.github.io/archlinuxbi-ji.html" rel="alternate"></link><published>2017-02-09T00:00:00+08:00</published><updated>2017-02-09T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-02-09:/archlinuxbi-ji.html</id><summary type="html">&lt;p&gt;Shell: zsh
+窗口管理器: i3wm 
+终端模拟器: urxvt 
+文本编辑器: vim/emacs
+文件浏览器: pfmanfm
+网页浏览器: firefox
+音乐播放器: moc
+邮件客户端: mutt
+代理服务器: shadowsocks
+文档浏览器: zeal&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2&gt;VirtualBox Additions&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S virtualbox-guest-utils xf86-video-dummy xf86-video-fbdev xf86-video-vesa
+sudo modprobe -a vboxguest vboxsf vboxvideo
+sudo systemctl enable vboxservice.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;yaourt&lt;/h2&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，在末尾添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[archlinuxcn]&lt;/span&gt;
+&lt;span class="na"&gt;SigLevel …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Shell: zsh
+窗口管理器: i3wm 
+终端模拟器: urxvt 
+文本编辑器: vim/emacs
+文件浏览器: pfmanfm
+网页浏览器: firefox
+音乐播放器: moc
+邮件客户端: mutt
+代理服务器: shadowsocks
+文档浏览器: zeal&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2&gt;VirtualBox Additions&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S virtualbox-guest-utils xf86-video-dummy xf86-video-fbdev xf86-video-vesa
+sudo modprobe -a vboxguest vboxsf vboxvideo
+sudo systemctl enable vboxservice.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;yaourt&lt;/h2&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，在末尾添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[archlinuxcn]&lt;/span&gt;
+&lt;span class="na"&gt;SigLevel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Optional TrustedOnly&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://repo.archlinuxcn.org/$arch&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装软件包&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S curl wget tmux moc rxvt-unicode zsh chromium vim emacs git python python-setuptools python-pip python2 python2-setuptools python2-pip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;字体&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S ttf-ms-fonts
+yaourt -S adobe-source-code-pro
+yaourt wqy
+git clone https://github.com/powerline/fonts.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;xorg&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S xorg-server xorg-server-utils xorg-apps xorg-xinit xorg-twm xorg-xclock xterm 
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;i3wm&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S i3wm i3status
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;常用快捷键
+|快捷键(区分大小写)|功能描述|
+|---|---|
+|Mod E|关闭i3|
+|Mod C|重新加载i3|
+|Mod R|重新启动i3|
+|Mod Q|关闭当前窗口|
+|Mod e|进入排列模式|
+|Mod w|进入标签模式|
+|Mod s|进入层叠模式|
+|Mod r|进入窗口尺寸调整模式|
+|Mod Enter|打开终端|&lt;/p&gt;
+&lt;h2&gt;urxvt&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 安装
+yaourt -S rxvt-unicode rxvt-perls
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;~/.Xresources&lt;/code&gt;配置见https://github.com/liguangsheng/dotfiles/blob/master/.Xresources&lt;/p&gt;
+&lt;h3&gt;Cpoy &amp;amp; Patse&lt;/h3&gt;
+&lt;p&gt;urxvt使用PRIMARY来复制和粘贴，不能与系统的clipboard同步。&lt;/p&gt;
+&lt;p&gt;使用urxvt-perls的selection-to-clipboard可以同步。&lt;/p&gt;
+&lt;p&gt;也可以使用第三方的程序来同步PRIMARY和系统的clipboard。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S autocutsel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在&lt;code&gt;~/.xinitrc&lt;/code&gt;中加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;autocutsel -fork &amp;amp;
+autocutsel -selection PRIMARY -fork &amp;amp;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;中文输入法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S fcitx fcitx-im fcitx-cloudpinyin fcitx-sogoupinyin fcitx-configtool
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S zsh
+sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;feh&lt;/h2&gt;
+&lt;p&gt;使用feh设置壁纸&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;feh --bg-scale &amp;lt;path-to-wallpaper&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;misc&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -Syu 更新系统
+pacman -Rsc 删除包及其以来
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="archlinux"></category></entry><entry><title>MacType与VirtualBox冲突</title><link href="http://liguangsheng.github.io/mactypeyu-virtualboxchong-tu.html" rel="alternate"></link><published>2017-01-12T15:45:00+08:00</published><updated>2017-06-15T17:52:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-01-12:/mactypeyu-virtualboxchong-tu.html</id><summary type="html">&lt;p&gt;MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。&lt;/p&gt;
+&lt;h2&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;在MacType的配置文件中加入以下节点&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[ExcludeSub] 
+javaw.exe 
+vbox-img.exe
+VBoxBalloonCtrl.exe
+VBoxDTrace.exe
+VBoxExtPackHelperApp.exe
+VBoxHeadless.exe
+VBoxManage.exe
+VBoxNetDHCP.exe
+VBoxNetNAT.exe
+VBoxSDL.exe
+VBoxSVC.exe
+VBoxTestOGL.exe
+VBoxWebSrv.exe
+VirtualBox.exe
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。&lt;/p&gt;
+&lt;h2&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;在MacType的配置文件中加入以下节点&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[ExcludeSub] 
+javaw.exe 
+vbox-img.exe
+VBoxBalloonCtrl.exe
+VBoxDTrace.exe
+VBoxExtPackHelperApp.exe
+VBoxHeadless.exe
+VBoxManage.exe
+VBoxNetDHCP.exe
+VBoxNetNAT.exe
+VBoxSDL.exe
+VBoxSVC.exe
+VBoxTestOGL.exe
+VBoxWebSrv.exe
+VirtualBox.exe
+&lt;/pre&gt;&lt;/div&gt;</content><category term="mactype"></category><category term="virtualbox"></category></entry><entry><title>正则表达式速查</title><link href="http://liguangsheng.github.io/regex.html" rel="alternate"></link><published>2016-12-22T00:00:00+08:00</published><updated>2016-12-22T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2016-12-22:/regex.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;来源于网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="regex" src="./images/regex.png"&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;来源于网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="regex" src="./images/regex.png"&gt;&lt;/p&gt;</content><category term="regex"></category></entry><entry><title>jupyter笔记</title><link href="http://liguangsheng.github.io/jupyterbi-ji.html" rel="alternate"></link><published>2016-12-03T00:00:00+08:00</published><updated>2016-12-03T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2016-12-03:/jupyterbi-ji.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 安装jupyter
+pip install jupyter
+# 建立server文件夹
+mkdir jupyter-server
+cd jypyter-server
+# 运行jypyter-notebook
+jupyter notebook
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;~/.jupyter/custom&lt;/code&gt;下新建&lt;code&gt;custom.css&lt;/code&gt;。notebook会自动加载这个css文件，来改变页面样式。&lt;/p&gt;
+&lt;h2&gt;快捷键&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tab&lt;/td&gt;
+&lt;td&gt;代码补全或者缩进&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shift-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell，选择下一个cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell，下面插入一个cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-]&lt;/td&gt;
+&lt;td&gt;缩进&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shift-Tab&lt;/td&gt;
+&lt;td&gt;帮助信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 安装jupyter
+pip install jupyter
+# 建立server文件夹
+mkdir jupyter-server
+cd jypyter-server
+# 运行jypyter-notebook
+jupyter notebook
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;~/.jupyter/custom&lt;/code&gt;下新建&lt;code&gt;custom.css&lt;/code&gt;。notebook会自动加载这个css文件，来改变页面样式。&lt;/p&gt;
+&lt;h2&gt;快捷键&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Tab&lt;/td&gt;
+&lt;td&gt;代码补全或者缩进&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shift-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell，选择下一个cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt-Enter&lt;/td&gt;
+&lt;td&gt;运行当前cell，下面插入一个cell&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-]&lt;/td&gt;
+&lt;td&gt;缩进&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shift-Tab&lt;/td&gt;
+&lt;td&gt;帮助信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</content><category term="jupyter"></category><category term="ipython"></category></entry><entry><title>win32实现屏幕找色</title><link href="http://liguangsheng.github.io/win32-find-color.html" rel="alternate"></link><published>2016-03-12T00:00:00+08:00</published><updated>2016-03-12T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2016-03-12:/win32-find-color.html</id><summary type="html">&lt;p&gt;Implement FindColor function with win32.&lt;/p&gt;</summary><content type="html">&lt;p&gt;实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。&lt;/p&gt;
+&lt;p&gt;win32中有个函数叫做GetPixel()，这个函数可以用来获取屏幕上某个点的RGB值，用这个函数虽然可以实现我们的目标，但是在目标区域较大的情况下，GetPixel()存在严重的效率问题，找色非！常！慢！&lt;/p&gt;
+&lt;p&gt;这里有一种效率比较高的屏幕找色函数的实现，主要步骤是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用BitBlt函数将屏幕贴图到内存兼容DC中&lt;/li&gt;
+&lt;li&gt;使用GetBitmapBits函数将bitmap图片的所有颜色值一次性输入到缓冲区中&lt;/li&gt;
+&lt;li&gt;将缓冲区中的颜色值与目标颜色进行比对&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实现代码如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 在rect的矩形区域内查找颜色为rgb的像素点&lt;/span&gt;
+&lt;span class="n"&gt;POINT&lt;/span&gt; &lt;span class="nf"&gt;FindColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RECT&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DWORD&lt;/span&gt; &lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;HDC&lt;/span&gt; &lt;span class="n"&gt;ScreenDC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GetDC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;HDC&lt;/span&gt; &lt;span class="n"&gt;memScreenDC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CreateCompatibleDC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ScreenDC&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bottom&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="n"&gt;HBITMAP&lt;/span&gt; &lt;span class="n"&gt;hBitmap&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CreateCompatibleBitmap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GetDC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;HGDIOBJ&lt;/span&gt; &lt;span class="n"&gt;hOldbmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SelectObject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;memScreenDC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hBitmap&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="n"&gt;BitBlt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;memScreenDC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ScreenDC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SRCCOPY&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;SelectObject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;memScreenDC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hOldbmp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="n"&gt;BYTE&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;bmpBuffer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;BYTE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="n"&gt;GetBitmapBits&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hBitmap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;height&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="n"&gt;DeleteObject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hBitmap&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;DeleteDC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;memScreenDC&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;height&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;GetRValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;GetGValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;GetBValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rgb&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;POINT&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;col&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;delete&lt;/span&gt; &lt;span class="n"&gt;bmpBuffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;POINT&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这个函数在1366*768的矩形区域中找色一次耗时大约40ms，效率还算可以。如果需要大量使用，则可以修改代码，不要重复的创建和删除资源，比如创建DC和删除DC，分配缓冲区和回收缓冲区。&lt;/p&gt;</content><category term="C"></category><category term="C++"></category><category term="Win32"></category></entry></feed>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog - Linux</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/linux.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-07-21T00:00:00+08:00</updated><entry><title>常用linux命令</title><link href="http://liguangsheng.github.io/chang-yong-linuxming-ling.html" rel="alternate"></link><published>2017-07-21T00:00:00+08:00</published><updated>2017-07-21T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-21:/chang-yong-linuxming-ling.html</id><summary type="html">&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ssh登陆
+# ssh user@host -p port
+ssh lgs@localhost -p 9922
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;scp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 上传文件
+# scp -P port /path/to/local user@host:/path/to/remote
+scp -P 9922 d:\tmp\test.py lgs@localhost:/tmp/test.py
+
+# 上传文件夹
+# scp -r -P port /path/to/local user@host:/path/to/remote …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ssh登陆
+# ssh user@host -p port
+ssh lgs@localhost -p 9922
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;scp&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 上传文件
+# scp -P port /path/to/local user@host:/path/to/remote
+scp -P 9922 d:\tmp\test.py lgs@localhost:/tmp/test.py
+
+# 上传文件夹
+# scp -r -P port /path/to/local user@host:/path/to/remote
+scp -r -P 9922 d:\tmp\test\ lgs@localhost:/tmp/test/
+
+# 下载文件
+scp -P 9922 lgs@localhost:/tmp/test.py d:\tmp\test.py 
+
+# 下载文件夹
+scp -r -P 9922 lgs@localhost:/tmp/test/ d:\tmp\test\
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;进程&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ctrl-z # 挂起当前进程到后台
+bg # 查看后台进程
+bg [id] # 后台运行进程
+fg [id] # 将进程切到前台运行
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;查找文件&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find &amp;lt;path&amp;gt; -name &amp;quot;*xxx*&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;统计行数&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -name &amp;quot;*.py&amp;quot;|xargs cat|wc -l
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;OpenSSH&lt;/h2&gt;
+&lt;p&gt;openssh 要求密码，提示&lt;code&gt;passphrase length hidden intenationlly&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id localhost
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category></entry><entry><title>rhel/centos笔记</title><link href="http://liguangsheng.github.io/rhelcentosbi-ji.html" rel="alternate"></link><published>2017-07-13T00:00:00+08:00</published><updated>2017-07-13T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-13:/rhelcentosbi-ji.html</id><summary type="html">&lt;h2&gt;&lt;strong&gt;OS: CentOS 6.8 | RHEL 6.5 &lt;/strong&gt;&lt;/h2&gt;
+&lt;h1&gt;VirtualBox中为系统安装增强功能包&lt;/h1&gt;
+&lt;p&gt;安装增强功能包需要依赖一些工具包，装上就好&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install -y gcc gcc-c++ make kernel kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;VirtualBox共享文件夹&lt;/h1&gt;
+&lt;p&gt;在设置中，为虚拟机分配一个共享文件夹，勾选固定分配。
+在虚拟机中执行以下命令挂载共享文件夹。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /mnt/vmshare # 创建共享文件夹挂载点
+sudo mount -t vboxsf vmshare /mnt/vmshare # 挂载
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改主机名(hostname)&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vim /etc/sysconfig/network
+
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=&amp;lt;your hostname …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;&lt;strong&gt;OS: CentOS 6.8 | RHEL 6.5 &lt;/strong&gt;&lt;/h2&gt;
+&lt;h1&gt;VirtualBox中为系统安装增强功能包&lt;/h1&gt;
+&lt;p&gt;安装增强功能包需要依赖一些工具包，装上就好&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo yum install -y gcc gcc-c++ make kernel kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;VirtualBox共享文件夹&lt;/h1&gt;
+&lt;p&gt;在设置中，为虚拟机分配一个共享文件夹，勾选固定分配。
+在虚拟机中执行以下命令挂载共享文件夹。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir /mnt/vmshare # 创建共享文件夹挂载点
+sudo mount -t vboxsf vmshare /mnt/vmshare # 挂载
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;修改主机名(hostname)&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vim /etc/sysconfig/network
+
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=&amp;lt;your hostname&amp;gt; # 修改这里
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装epel扩展&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum intsall epel-release -y
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="rhel"></category><category term="centos"></category></entry><entry><title>linux配置Shadowsocks</title><link href="http://liguangsheng.github.io/linuxpei-zhi-shadowsocks.html" rel="alternate"></link><published>2017-04-06T00:00:00+08:00</published><updated>2017-04-06T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-04-06:/linuxpei-zhi-shadowsocks.html</id><summary type="html">&lt;h2&gt;安装Shadowsocks&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install shadowsocks
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;服务端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，shadowsocks.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -c shadowsocks.json -d start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;关闭ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -d stop
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;客户端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，/etc/shadowsocks/config.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;安装Shadowsocks&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install shadowsocks
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;服务端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，shadowsocks.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -c shadowsocks.json -d start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;关闭ssserver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssserver -d stop
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;客户端配置&lt;/h2&gt;
+&lt;p&gt;shadowsocks配置文件，/etc/shadowsocks/config.json&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;,
+    &amp;quot;server_port&amp;quot;:1118,
+    &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动shadowsocks客户端&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sslocal -c /etc/shadowsocks/config.json -d start
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="shadowsocks"></category></entry><entry><title>linux备份与恢复</title><link href="http://liguangsheng.github.io/linuxbei-fen-yu-hui-fu.html" rel="alternate"></link><published>2017-03-20T00:00:00+08:00</published><updated>2017-03-20T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-20:/linuxbei-fen-yu-hui-fu.html</id><summary type="html">&lt;h2&gt;tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 备份系统
+cd /
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys /  
+
+# 恢复系统
+tar xvpfz backup.tgz -C /
+# 创建备份时跳过的文件夹
+mkdir proc
+mkdir mnt
+mkdir sys
+mkdir lost+found
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;dd&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 在livecd中操作
+# 备份系统
+dd if=/dev/sdax of=~/archlinux.backup
+，在livecd中
+dd if=archlinux.backup …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 备份系统
+cd /
+tar cvpzf backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/sys /  
+
+# 恢复系统
+tar xvpfz backup.tgz -C /
+# 创建备份时跳过的文件夹
+mkdir proc
+mkdir mnt
+mkdir sys
+mkdir lost+found
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;dd&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 在livecd中操作
+# 备份系统
+dd if=/dev/sdax of=~/archlinux.backup
+，在livecd中
+dd if=archlinux.backup of=/dev/sdax
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="backup"></category></entry><entry><title>ubuntu笔记</title><link href="http://liguangsheng.github.io/ubuntubi-ji.html" rel="alternate"></link><published>2017-03-17T00:00:00+08:00</published><updated>2017-03-17T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-03-17:/ubuntubi-ji.html</id><summary type="html">&lt;p&gt;OS: Ubuntu 16.04 xenial
+Kernel: x86_64 Linux 4.4.0-xx-generic&lt;/p&gt;
+&lt;h2&gt;启动:text mode or GUI&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 禁用GUI，启动到text mode
+sudo systemctl disable display-manager.service
+# 启用GUI
+sudo systemctl enable display-manager.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;ssh服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install openssh-server # 安装ssh服务
+sudo systemctl start sshd.service # 启动ssh服务
+sudo systemctl enable sshd.service # 开机自启动
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;OS: Ubuntu 16.04 xenial
+Kernel: x86_64 Linux 4.4.0-xx-generic&lt;/p&gt;
+&lt;h2&gt;启动:text mode or GUI&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 禁用GUI，启动到text mode
+sudo systemctl disable display-manager.service
+# 启用GUI
+sudo systemctl enable display-manager.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;ssh服务&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install openssh-server # 安装ssh服务
+sudo systemctl start sshd.service # 启动ssh服务
+sudo systemctl enable sshd.service # 开机自启动
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install zsh
+sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;emacs25&lt;/h2&gt;
+&lt;p&gt;通过ppa安装emacs25&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# through ppa
+sudo add-apt-repository ppa:alexmurray/emacs
+sudo apt-get update
+sudo apt-get install emacs25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;通过源代码编译安装emacs&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# through source code
+sudo apt install build-essential checkinstall
+sudo apt-get build-dep emacs24
+
+wget http://ftp.gnu.org/gnu/emacs/emacs-25.1.tar.gz
+tar xzvf emacs-25.1.tar.gz
+cd emacs-25.1
+./configure
+make
+sudo checkinstall
+
+# 删除emacs25
+sudo dpkg -r emacs-25
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="ubuntu"></category></entry><entry><title>linux压缩与解压</title><link href="http://liguangsheng.github.io/linuxya-suo-yu-jie-ya.html" rel="alternate"></link><published>2017-02-27T00:00:00+08:00</published><updated>2017-02-27T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-02-27:/linuxya-suo-yu-jie-ya.html</id><summary type="html">&lt;h2&gt;.tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将foobar打包为/tmp/foobar.tar
+tar cvf /tmp/foobar.tar foobar/
+
+# 将/tmp/foobar.tar解包为foobar
+tar xvf /tmp/foobar.tar
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.gz | .tgz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以gzip方式压缩
+tar zcvf /tmp/foobar.tar.gz foobar/
+
+# 解压
+tar zxvf /tmp/foobar.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.bz2&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以bzip2方式压缩
+tar jcvf /tmp/foobar.tar.bz2 foobar/
+
+# 解压
+tar …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;.tar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 将foobar打包为/tmp/foobar.tar
+tar cvf /tmp/foobar.tar foobar/
+
+# 将/tmp/foobar.tar解包为foobar
+tar xvf /tmp/foobar.tar
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.gz | .tgz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以gzip方式压缩
+tar zcvf /tmp/foobar.tar.gz foobar/
+
+# 解压
+tar zxvf /tmp/foobar.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.tar.bz2&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 以bzip2方式压缩
+tar jcvf /tmp/foobar.tar.bz2 foobar/
+
+# 解压
+tar jxvf /tmp/foobar.tar.bz2 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;.zip&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 压缩文件夹
+zip -r /tmp/foobar.zip foobar/
+
+# 压缩文件
+zip foo.zip foo
+
+# 解压
+unzip /tmp/foobar.zip
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="tar"></category></entry><entry><title>archlinux笔记</title><link href="http://liguangsheng.github.io/archlinuxbi-ji.html" rel="alternate"></link><published>2017-02-09T00:00:00+08:00</published><updated>2017-02-09T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-02-09:/archlinuxbi-ji.html</id><summary type="html">&lt;p&gt;Shell: zsh
+窗口管理器: i3wm 
+终端模拟器: urxvt 
+文本编辑器: vim/emacs
+文件浏览器: pfmanfm
+网页浏览器: firefox
+音乐播放器: moc
+邮件客户端: mutt
+代理服务器: shadowsocks
+文档浏览器: zeal&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2&gt;VirtualBox Additions&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S virtualbox-guest-utils xf86-video-dummy xf86-video-fbdev xf86-video-vesa
+sudo modprobe -a vboxguest vboxsf vboxvideo
+sudo systemctl enable vboxservice.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;yaourt&lt;/h2&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，在末尾添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[archlinuxcn]&lt;/span&gt;
+&lt;span class="na"&gt;SigLevel …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Shell: zsh
+窗口管理器: i3wm 
+终端模拟器: urxvt 
+文本编辑器: vim/emacs
+文件浏览器: pfmanfm
+网页浏览器: firefox
+音乐播放器: moc
+邮件客户端: mutt
+代理服务器: shadowsocks
+文档浏览器: zeal&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;h2&gt;VirtualBox Additions&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S virtualbox-guest-utils xf86-video-dummy xf86-video-fbdev xf86-video-vesa
+sudo modprobe -a vboxguest vboxsf vboxvideo
+sudo systemctl enable vboxservice.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;yaourt&lt;/h2&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，在末尾添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[archlinuxcn]&lt;/span&gt;
+&lt;span class="na"&gt;SigLevel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Optional TrustedOnly&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://repo.archlinuxcn.org/$arch&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装软件包&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S curl wget tmux moc rxvt-unicode zsh chromium vim emacs git python python-setuptools python-pip python2 python2-setuptools python2-pip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;字体&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S ttf-ms-fonts
+yaourt -S adobe-source-code-pro
+yaourt wqy
+git clone https://github.com/powerline/fonts.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;xorg&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S xorg-server xorg-server-utils xorg-apps xorg-xinit xorg-twm xorg-xclock xterm 
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;i3wm&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman -S i3wm i3status
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;常用快捷键
+|快捷键(区分大小写)|功能描述|
+|---|---|
+|Mod E|关闭i3|
+|Mod C|重新加载i3|
+|Mod R|重新启动i3|
+|Mod Q|关闭当前窗口|
+|Mod e|进入排列模式|
+|Mod w|进入标签模式|
+|Mod s|进入层叠模式|
+|Mod r|进入窗口尺寸调整模式|
+|Mod Enter|打开终端|&lt;/p&gt;
+&lt;h2&gt;urxvt&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 安装
+yaourt -S rxvt-unicode rxvt-perls
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;~/.Xresources&lt;/code&gt;配置见https://github.com/liguangsheng/dotfiles/blob/master/.Xresources&lt;/p&gt;
+&lt;h3&gt;Cpoy &amp;amp; Patse&lt;/h3&gt;
+&lt;p&gt;urxvt使用PRIMARY来复制和粘贴，不能与系统的clipboard同步。&lt;/p&gt;
+&lt;p&gt;使用urxvt-perls的selection-to-clipboard可以同步。&lt;/p&gt;
+&lt;p&gt;也可以使用第三方的程序来同步PRIMARY和系统的clipboard。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S autocutsel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在&lt;code&gt;~/.xinitrc&lt;/code&gt;中加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;autocutsel -fork &amp;amp;
+autocutsel -selection PRIMARY -fork &amp;amp;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;中文输入法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S fcitx fcitx-im fcitx-cloudpinyin fcitx-sogoupinyin fcitx-configtool
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;zsh&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S zsh
+sh -c &amp;quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;feh&lt;/h2&gt;
+&lt;p&gt;使用feh设置壁纸&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;feh --bg-scale &amp;lt;path-to-wallpaper&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;misc&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pacman -Syu 更新系统
+pacman -Rsc 删除包及其以来
+&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="archlinux"></category></entry></feed>

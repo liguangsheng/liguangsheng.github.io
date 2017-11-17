@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>archlinux笔记</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="archlinuxbi-ji.html">archlinux笔记</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-02-09 00:00:00+08:00" content="2017-02-09 00:00:00+08:00">2017-02-09</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/linux.html" itemprop="url" rel="index">
+                		<span>Linux</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/linux.html" itemprop="url" rel="index">
+                		<span>linux</span>
+                	</a>
+                	# <a href="tag/archlinux.html" itemprop="url" rel="index">
+                		<span>archlinux</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<p>Shell: zsh
+窗口管理器: i3wm 
+终端模拟器: urxvt 
+文本编辑器: vim/emacs
+文件浏览器: pfmanfm
+网页浏览器: firefox
+音乐播放器: moc
+邮件客户端: mutt
+代理服务器: shadowsocks
+文档浏览器: zeal</p>
+<h2>安装</h2>
+<h2>VirtualBox Additions</h2>
+<div class="highlight"><pre><span></span>sudo pacman -S virtualbox-guest-utils xf86-video-dummy xf86-video-fbdev xf86-video-vesa
+sudo modprobe -a vboxguest vboxsf vboxvideo
+sudo systemctl enable vboxservice.service
+</pre></div>
+
+
+<h2>yaourt</h2>
+<p>编辑<code>/etc/pacman.conf</code>，在末尾添加：</p>
+<div class="highlight"><pre><span></span><span class="k">[archlinuxcn]</span>
+<span class="na">SigLevel</span> <span class="o">=</span> <span class="s">Optional TrustedOnly</span>
+<span class="na">Server</span> <span class="o">=</span> <span class="s">http://repo.archlinuxcn.org/$arch</span>
+</pre></div>
+
+
+<h2>安装软件包</h2>
+<div class="highlight"><pre><span></span>sudo pacman -S curl wget tmux moc rxvt-unicode zsh chromium vim emacs git python python-setuptools python-pip python2 python2-setuptools python2-pip
+</pre></div>
+
+
+<h2>字体</h2>
+<div class="highlight"><pre><span></span>yaourt -S ttf-ms-fonts
+yaourt -S adobe-source-code-pro
+yaourt wqy
+git clone https://github.com/powerline/fonts.git
+</pre></div>
+
+
+<h2>xorg</h2>
+<div class="highlight"><pre><span></span>sudo pacman -S xorg-server xorg-server-utils xorg-apps xorg-xinit xorg-twm xorg-xclock xterm 
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+</pre></div>
+
+
+<h2>i3wm</h2>
+<div class="highlight"><pre><span></span>sudo pacman -S i3wm i3status
+</pre></div>
+
+
+<p>常用快捷键
+|快捷键(区分大小写)|功能描述|
+|---|---|
+|Mod E|关闭i3|
+|Mod C|重新加载i3|
+|Mod R|重新启动i3|
+|Mod Q|关闭当前窗口|
+|Mod e|进入排列模式|
+|Mod w|进入标签模式|
+|Mod s|进入层叠模式|
+|Mod r|进入窗口尺寸调整模式|
+|Mod Enter|打开终端|</p>
+<h2>urxvt</h2>
+<div class="highlight"><pre><span></span># 安装
+yaourt -S rxvt-unicode rxvt-perls
+</pre></div>
+
+
+<p><code>~/.Xresources</code>配置见https://github.com/liguangsheng/dotfiles/blob/master/.Xresources</p>
+<h3>Cpoy &amp; Patse</h3>
+<p>urxvt使用PRIMARY来复制和粘贴，不能与系统的clipboard同步。</p>
+<p>使用urxvt-perls的selection-to-clipboard可以同步。</p>
+<p>也可以使用第三方的程序来同步PRIMARY和系统的clipboard。</p>
+<div class="highlight"><pre><span></span>yaourt -S autocutsel
+</pre></div>
+
+
+<p>在<code>~/.xinitrc</code>中加入</p>
+<div class="highlight"><pre><span></span>autocutsel -fork &amp;
+autocutsel -selection PRIMARY -fork &amp;
+</pre></div>
+
+
+<h2>中文输入法</h2>
+<div class="highlight"><pre><span></span>yaourt -S fcitx fcitx-im fcitx-cloudpinyin fcitx-sogoupinyin fcitx-configtool
+</pre></div>
+
+
+<h2>zsh</h2>
+<div class="highlight"><pre><span></span>yaourt -S zsh
+sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</pre></div>
+
+
+<h2>feh</h2>
+<p>使用feh设置壁纸</p>
+<div class="highlight"><pre><span></span>feh --bg-scale &lt;path-to-wallpaper&gt;
+</pre></div>
+
+
+<h2>misc</h2>
+<div class="highlight"><pre><span></span>pacman -Syu 更新系统
+pacman -Rsc 删除包及其以来
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>

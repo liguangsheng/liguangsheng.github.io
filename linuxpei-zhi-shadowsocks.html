@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>linux配置Shadowsocks</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="linuxpei-zhi-shadowsocks.html">linux配置Shadowsocks</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-04-06 00:00:00+08:00" content="2017-04-06 00:00:00+08:00">2017-04-06</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/linux.html" itemprop="url" rel="index">
+                		<span>Linux</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/linux.html" itemprop="url" rel="index">
+                		<span>linux</span>
+                	</a>
+                	# <a href="tag/shadowsocks.html" itemprop="url" rel="index">
+                		<span>shadowsocks</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<h2>安装Shadowsocks</h2>
+<div class="highlight"><pre><span></span>pip install shadowsocks
+</pre></div>
+
+
+<h2>服务端配置</h2>
+<p>shadowsocks配置文件，shadowsocks.json</p>
+<div class="highlight"><pre><span></span>{
+    &quot;server&quot;:&quot;0.0.0.0&quot;,
+    &quot;server_port&quot;:1118,
+    &quot;local_address&quot;:&quot;127.0.0.1&quot;,
+    &quot;local_port&quot;:1080,
+    &quot;password&quot;:&quot;11181118&quot;,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;
+}
+</pre></div>
+
+
+<p>启动ssserver</p>
+<div class="highlight"><pre><span></span>ssserver -c shadowsocks.json -d start
+</pre></div>
+
+
+<p>关闭ssserver</p>
+<div class="highlight"><pre><span></span>ssserver -d stop
+</pre></div>
+
+
+<h2>客户端配置</h2>
+<p>shadowsocks配置文件，/etc/shadowsocks/config.json</p>
+<div class="highlight"><pre><span></span>{
+    &quot;server&quot;:&quot;0.0.0.0&quot;,
+    &quot;server_port&quot;:1118,
+    &quot;local_address&quot;:&quot;127.0.0.1&quot;,
+    &quot;local_port&quot;:1080,
+    &quot;password&quot;:&quot;11181118&quot;,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;
+}
+</pre></div>
+
+
+<p>启动shadowsocks客户端</p>
+<div class="highlight"><pre><span></span>sslocal -c /etc/shadowsocks/config.json -d start
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>

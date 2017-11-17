@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>win32实现屏幕找色</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="win32-find-color.html">win32实现屏幕找色</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2016-03-12 00:00:00+08:00" content="2016-03-12 00:00:00+08:00">2016-03-12</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/cc.html" itemprop="url" rel="index">
+                		<span>C/C++</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/c.html" itemprop="url" rel="index">
+                		<span>C</span>
+                	</a>
+                	# <a href="tag/c.html" itemprop="url" rel="index">
+                		<span>C++</span>
+                	</a>
+                	# <a href="tag/win32.html" itemprop="url" rel="index">
+                		<span>Win32</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<p>实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。</p>
+<p>win32中有个函数叫做GetPixel()，这个函数可以用来获取屏幕上某个点的RGB值，用这个函数虽然可以实现我们的目标，但是在目标区域较大的情况下，GetPixel()存在严重的效率问题，找色非！常！慢！</p>
+<p>这里有一种效率比较高的屏幕找色函数的实现，主要步骤是：</p>
+<ol>
+<li>使用BitBlt函数将屏幕贴图到内存兼容DC中</li>
+<li>使用GetBitmapBits函数将bitmap图片的所有颜色值一次性输入到缓冲区中</li>
+<li>将缓冲区中的颜色值与目标颜色进行比对</li>
+</ol>
+<p>实现代码如下：</p>
+<div class="highlight"><pre><span></span><span class="c1">// 在rect的矩形区域内查找颜色为rgb的像素点</span>
+<span class="n">POINT</span> <span class="nf">FindColor</span><span class="p">(</span><span class="n">RECT</span> <span class="n">rect</span><span class="p">,</span> <span class="n">DWORD</span> <span class="n">rgb</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">HDC</span> <span class="n">ScreenDC</span> <span class="o">=</span> <span class="n">GetDC</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">HDC</span> <span class="n">memScreenDC</span> <span class="o">=</span> <span class="n">CreateCompatibleDC</span><span class="p">(</span><span class="n">ScreenDC</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">rect</span><span class="p">.</span><span class="n">right</span> <span class="o">-</span> <span class="n">rect</span><span class="p">.</span><span class="n">left</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">rect</span><span class="p">.</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">rect</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+
+    <span class="n">HBITMAP</span> <span class="n">hBitmap</span> <span class="o">=</span> <span class="n">CreateCompatibleBitmap</span><span class="p">(</span><span class="n">GetDC</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+    <span class="n">HGDIOBJ</span> <span class="n">hOldbmp</span> <span class="o">=</span> <span class="n">SelectObject</span><span class="p">(</span><span class="n">memScreenDC</span><span class="p">,</span> <span class="n">hBitmap</span><span class="p">);</span>
+
+    <span class="n">BitBlt</span><span class="p">(</span><span class="n">memScreenDC</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">ScreenDC</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">SRCCOPY</span><span class="p">);</span>
+    <span class="n">SelectObject</span><span class="p">(</span><span class="n">memScreenDC</span><span class="p">,</span> <span class="n">hOldbmp</span><span class="p">);</span>
+
+    <span class="n">BYTE</span> <span class="o">*</span><span class="n">bmpBuffer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BYTE</span><span class="p">[</span><span class="n">width</span><span class="o">*</span><span class="n">height</span> <span class="o">*</span> <span class="mi">4</span><span class="p">];</span>
+    <span class="n">GetBitmapBits</span><span class="p">(</span><span class="n">hBitmap</span><span class="p">,</span> <span class="n">width</span><span class="o">*</span><span class="n">height</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bmpBuffer</span><span class="p">);</span>
+
+    <span class="n">DeleteObject</span><span class="p">(</span><span class="n">hBitmap</span><span class="p">);</span>
+    <span class="n">DeleteDC</span><span class="p">(</span><span class="n">memScreenDC</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bmpBuffer</span><span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="mi">4</span><span class="p">];</span>
+            <span class="kt">int</span> <span class="n">g</span> <span class="o">=</span> <span class="n">bmpBuffer</span><span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">bmpBuffer</span><span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">width</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="n">GetRValue</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">g</span> <span class="o">==</span> <span class="n">GetGValue</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">b</span> <span class="o">==</span> <span class="n">GetBValue</span><span class="p">(</span><span class="n">rgb</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">delete</span> <span class="n">bmpBuffer</span><span class="p">;</span>
+                <span class="k">return</span> <span class="n">POINT</span><span class="p">{</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span> <span class="p">};</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">delete</span> <span class="n">bmpBuffer</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">POINT</span><span class="p">{</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>这个函数在1366*768的矩形区域中找色一次耗时大约40ms，效率还算可以。如果需要大量使用，则可以修改代码，不要重复的创建和删除资源，比如创建DC和删除DC，分配缓冲区和回收缓冲区。</p>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>
