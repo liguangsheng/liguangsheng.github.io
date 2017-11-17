@@ -150,19 +150,18 @@ em {
     }
 }
 
-/* content-archive ***********************************************************/
+/* content-wrapper ***********************************************************/
 
-.content-archive {
+.content-wrapper {
     margin: 40px auto;
     width: 100%;
-    /*min-height: ;*/
 }
 
-.content-archive .archive-header {
+.content-wrapper .content-header {
     margin-bottom: 30px
 }
 
-.content-archive .archive-header a.home-entry {
+.content-wrapper .content-header a.home-entry {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -175,24 +174,24 @@ em {
     margin-left: -20px
 }
 
-.content-archive .archive-header .avatar {
+.content-wrapper .content-header .avatar {
     display: block
 }
 
-.content-archive .archive-header .avatar img,.content-archive .archive-header .avatar .blog-info {
+.content-wrapper .content-header .avatar img,.content-wrapper .content-header .avatar .blog-info {
     line-height: 1.8em;
     display: inline-block;
     vertical-align: middle
 }
 
-.content-archive .archive-header .avatar img {
+.content-wrapper .content-header .avatar img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     vertical-align: middle
 }
 
-.content-archive .archive-header .avatar .name {
+.content-wrapper .content-header .avatar .name {
     font-family: 'calligraffittiregular';
     font-weight: bold;
     color: #000;
@@ -201,25 +200,25 @@ em {
     width: 100px
 }
 
-.content-archive .archive-header .avatar .slogan {
+.content-wrapper .content-header .avatar .slogan {
     color: #999;
     display: inline-block
 }
 
-.content-archive .box-year {
+.content-wrapper .box-year {
     line-height: 3em
 }
 
-.content-archive .article-datetime {
+.content-wrapper .article-datetime {
     display: inline-block
 }
 
-.content-archive .article-datetime a {
+.content-wrapper .article-datetime a {
     font-size: 12px;
     color: #888
 }
 
-.content-archive .article-title {
+.content-wrapper .article-title {
     display: inline-block
 }
 
@@ -297,75 +296,75 @@ em {
 }
 
 @media screen and (min-width: 768px) {
-    .content-archive {
+    .content-wrapper {
         width: 500px;
         border-left: 4px solid #f9f9f9
     }
 
-    .content-archive .archive-header {
+    .content-wrapper .content-header {
         margin-bottom: 30px
     }
 
-    .content-archive .archive-header a.home-entry {
+    .content-wrapper .content-header a.home-entry {
         display: block
     }
 
-    .content-archive .archive-header .avatar {
+    .content-wrapper .content-header .avatar {
         display: block;
         margin-left: -30px
     }
 
-    .content-archive .archive-header .avatar img,.content-archive .archive-header .avatar .blog-info {
+    .content-wrapper .content-header .avatar img,.content-wrapper .content-header .avatar .blog-info {
         line-height: 1.8em;
         display: inline-block;
         vertical-align: middle
     }
 
-    .content-archive .archive-header .avatar img .slogan,.content-archive .archive-header .avatar .blog-info .slogan {
+    .content-wrapper .content-header .avatar img .slogan,.content-wrapper .content-header .avatar .blog-info .slogan {
         color: #999;
         display: inline-block
     }
 }
 
 @media screen and (max-width: 767px) {
-    .content-archive {
+    .content-wrapper {
         overflow: hidden;
         margin-top: 30px;
         padding: 10px;
         width: 100%
     }
 
-    .content-archive .archive-header {
+    .content-wrapper .content-header {
         margin-bottom: 30px;
         text-align: center
     }
 
-    .content-archive .archive-header a.home-entry {
+    .content-wrapper .content-header a.home-entry {
         display: none
     }
 
-    .content-archive .archive-header .avatar {
+    .content-wrapper .content-header .avatar {
         display: block
     }
 
-    .content-archive .archive-header .avatar .blog-info {
+    .content-wrapper .content-header .avatar .blog-info {
         display: block;
         line-height: 1.8em
     }
 
-    .content-archive .archive-header .avatar .blog-info .name {
+    .content-wrapper .content-header .avatar .blog-info .name {
         text-align: center;
         display: inline-block;
         margin-top: 10px;
         margin-bottom: 8px
     }
 
-    .content-archive .archive-header .avatar .blog-info .slogan {
+    .content-wrapper .content-header .avatar .blog-info .slogan {
         display: block;
         color: #999
     }
 
-    .content-archive .archive-body {
+    .content-wrapper .archive-body {
         border-left: 4px solid #f9f9f9
     }
 }

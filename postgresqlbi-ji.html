@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>PostgreSQL笔记</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="postgresqlbi-ji.html">PostgreSQL笔记</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-06-21 10:42:00+08:00" content="2017-06-21 10:42:00+08:00">2017-06-21</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/software.html" itemprop="url" rel="index">
+                		<span>Software</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/postgresql.html" itemprop="url" rel="index">
+                		<span>postgresql</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<p><strong>数据库</strong></p>
+<div class="highlight"><pre><span></span># 创建数据库
+create database &lt;name&gt;;
+create database &lt;name&gt; template &lt;template_name&gt;;
+
+# 切换数据库
+\c &lt;dbname&gt;
+
+# 删除数据库
+drop database &lt;name&gt;;
+# or
+$ psql -U postgres -c &quot;drop database &lt;name&gt;;&quot;
+# or
+$ dropdb &lt;dbname&gt;
+# 如果删除时报错`cannot be executed on the currently open database`，切换到其他的数据库连接上，再进行删除
+
+# 连接数据库
+\connect &lt;name&gt;
+
+# 列出数据库
+\l
+</pre></div>
+
+
+<p><strong>表格</strong></p>
+<div class="highlight"><pre><span></span># 列出所有表格
+\d 
+\dt
+
+# 查看表结构
+\d &lt;table_name&gt;
+</pre></div>
+
+
+<p><strong>其他</strong></p>
+<div class="highlight"><pre><span></span># 退出
+\q
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>
