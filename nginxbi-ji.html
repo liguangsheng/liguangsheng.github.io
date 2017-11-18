@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="lgs">
+    <meta name="description" content="Life is short!">
+    <meta name="author" content="Li Guangsheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
+    <link rel="shortcut icon" href="http://liguangsheng.github.io/theme/image/favicon.ico" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/css/main.css" />
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://liguangsheng.github.io/theme/pygments/emacs.css" />
+    <title>Nginx笔记</title>
+</div>
+</head>
+<body>
+
+  <div class="headband"></div>
+  
+<section class="content-article">
+	<article class="post">
+	<header class="post-header">
+		<h1 class="post-title">
+			<a class=post-title-link href="nginxbi-ji.html">Nginx笔记</a>
+		</h1>
+		<div class="post-meta">
+            <span class="post-time">
+                <i class="fa fa-calendar-o"></i>
+            	<span class="post-meta-item-text">发表于</span>
+            	<time datetime="2017-07-08 13:49:00+08:00" content="2017-07-08 13:49:00+08:00">2017-07-08</time>
+          	</span>
+           	<span class="post-meta-separator">|</span>
+            <span class="post-category">
+                <i class="fa fa-folder-o"></i>
+              	<span class="post-meta-item-text">分类于</span>
+                <span>
+                	<a href="category/software.html" itemprop="url" rel="index">
+                		<span>Software</span>
+                	</a>
+                </span>
+            </span>
+            <span class="post-meta-separator">|</span>
+            <span class="post-tags">
+                <i class="fa fa-tags"></i>
+              	<span class="post-meta-item-text">标签: </span>
+                <span>
+                	# <a href="tag/nginx.html" itemprop="url" rel="index">
+                		<span>nginx</span>
+                	</a>
+                	# <a href="tag/centos.html" itemprop="url" rel="index">
+                		<span>centos</span>
+                	</a>
+                </span>
+            </span>
+        </div>
+	</header>
+	<div class="post-body">
+		<h1>CentOS上编译安装Nginx</h1>
+<p>首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。</p>
+<div class="highlight"><pre><span></span>wget http://nginx.org/download/nginx-1.12.2.tar.gz
+tar xzvf nginx-1.12.2.tar.gz
+</pre></div>
+
+
+<p>(可选)接着下载想要额外添加的模块的源代码</p>
+<div class="highlight"><pre><span></span># rtmp 直播支持
+git clone https://github.com/arut/nginx-rtmp-module
+
+# mp4 流媒体支持
+wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz
+tar xzvf nginx_mod_h264_streaming-2.2.7.tar.gz
+</pre></div>
+
+
+<p>mp4模块还需要修改一下源代码，注释掉<code>nginx_mod_h264_streaming-2.2.7/src/ngx_http_streaming_module.c</code>这个文件中的第158到161行</p>
+<div class="highlight"><pre><span></span><span class="mi">157</span>   <span class="cm">/* TODO: Win32 */</span>
+<span class="mi">158</span>   <span class="c1">//if (r-&gt;zero_in_uri)</span>
+<span class="mi">159</span>   <span class="c1">//{</span>
+<span class="mi">160</span>   <span class="c1">//  return NGX_DECLINED;</span>
+<span class="mi">161</span>   <span class="c1">//}</span>
+</pre></div>
+
+
+<p>安装编译必要的依赖包，不同的系统包名不同。</p>
+<div class="highlight"><pre><span></span># ubuntu
+sudo apt-get install openssl libssl-dev libpcre3 libpcre3-dev zlib1g-dev
+
+# centos
+sudo yum -y install pcre-devel openssl openssl-devel
+</pre></div>
+
+
+<p>开始编译和安装</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> nginx-1.12.2 <span class="c1"># 进入nginx源码目录</span>
+./configure --prefix<span class="o">=</span>/usr/local/nginx --with-pcre <span class="se">\</span>
+    --add-module<span class="o">=</span>../nginx-rtmp-module <span class="se">\</span>
+    --add-module<span class="o">=</span>../nginx_mod_h264_streaming-2.2.7
+
+修改objs/Makefile，去掉其中的-Werror
+
+make
+make install
+</pre></div>
+
+
+<h1>常用命令</h1>
+<div class="highlight"><pre><span></span># 启动
+/usr/local/nginx/sbin/nginx
+
+# 停止
+/usr/local/nginx/sbin/nginx -s stop
+
+# 重新加载配置
+/usr/local/nginx/sbin/nginx -s reload
+</pre></div>
+	</div>
+	<footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+</article>
+</section>
+
+  <footer class="content-footer text-center">
+    <p role="contentinfo">
+      © 2017 Li Guangsheng - Powered by pelican
+    </p>
+  </footer>
+</body>
+
+</html>

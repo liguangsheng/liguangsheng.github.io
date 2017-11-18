@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog - Software</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/software.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-08-24T11:07:00+08:00</updated><entry><title>ZeroMQ笔记</title><link href="http://liguangsheng.github.io/zeromqbi-ji.html" rel="alternate"></link><published>2017-07-17T12:01:00+08:00</published><updated>2017-07-18T09:30:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-17:/zeromqbi-ji.html</id><summary type="html">&lt;h1&gt;安装&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog - Software</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/software.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-11-18T13:32:00+08:00</updated><entry><title>ZeroMQ笔记</title><link href="http://liguangsheng.github.io/zeromqbi-ji.html" rel="alternate"></link><published>2017-07-17T12:01:00+08:00</published><updated>2017-07-18T09:30:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-17:/zeromqbi-ji.html</id><summary type="html">&lt;h1&gt;安装&lt;/h1&gt;
 &lt;p&gt;安装ZeroMQ&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 下载源代码并解压
 wget https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz
@@ -187,7 +187,77 @@ PUB发送消息给所有的SUB。如果此时SUB没有启动，下次启动时�
 &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="zeromq"></category></entry><entry><title>git笔记</title><link href="http://liguangsheng.github.io/gitbi-ji.html" rel="alternate"></link><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-03:/gitbi-ji.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
+&lt;/pre&gt;&lt;/div&gt;</content><category term="zeromq"></category></entry><entry><title>Nginx笔记</title><link href="http://liguangsheng.github.io/nginxbi-ji.html" rel="alternate"></link><published>2017-07-08T13:49:00+08:00</published><updated>2017-11-18T13:32:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-08:/nginxbi-ji.html</id><summary type="html">&lt;h1&gt;CentOS上编译安装Nginx&lt;/h1&gt;
+&lt;p&gt;首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://nginx.org/download/nginx-1.12.2.tar.gz
+tar xzvf nginx-1.12.2.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;(可选)接着下载想要额外添加的模块的源代码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rtmp 直播支持
+git clone https://github.com/arut/nginx-rtmp-module
+
+# mp4 流媒体支持
+wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz
+tar xzvf nginx_mod_h264_streaming-2.2 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;CentOS上编译安装Nginx&lt;/h1&gt;
+&lt;p&gt;首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://nginx.org/download/nginx-1.12.2.tar.gz
+tar xzvf nginx-1.12.2.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;(可选)接着下载想要额外添加的模块的源代码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rtmp 直播支持
+git clone https://github.com/arut/nginx-rtmp-module
+
+# mp4 流媒体支持
+wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz
+tar xzvf nginx_mod_h264_streaming-2.2.7.tar.gz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;mp4模块还需要修改一下源代码，注释掉&lt;code&gt;nginx_mod_h264_streaming-2.2.7/src/ngx_http_streaming_module.c&lt;/code&gt;这个文件中的第158到161行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;157&lt;/span&gt;   &lt;span class="cm"&gt;/* TODO: Win32 */&lt;/span&gt;
+&lt;span class="mi"&gt;158&lt;/span&gt;   &lt;span class="c1"&gt;//if (r-&amp;gt;zero_in_uri)&lt;/span&gt;
+&lt;span class="mi"&gt;159&lt;/span&gt;   &lt;span class="c1"&gt;//{&lt;/span&gt;
+&lt;span class="mi"&gt;160&lt;/span&gt;   &lt;span class="c1"&gt;//  return NGX_DECLINED;&lt;/span&gt;
+&lt;span class="mi"&gt;161&lt;/span&gt;   &lt;span class="c1"&gt;//}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;安装编译必要的依赖包，不同的系统包名不同。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ubuntu
+sudo apt-get install openssl libssl-dev libpcre3 libpcre3-dev zlib1g-dev
+
+# centos
+sudo yum -y install pcre-devel openssl openssl-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;开始编译和安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; nginx-1.12.2 &lt;span class="c1"&gt;# 进入nginx源码目录&lt;/span&gt;
+./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/nginx --with-pcre &lt;span class="se"&gt;\&lt;/span&gt;
+    --add-module&lt;span class="o"&gt;=&lt;/span&gt;../nginx-rtmp-module &lt;span class="se"&gt;\&lt;/span&gt;
+    --add-module&lt;span class="o"&gt;=&lt;/span&gt;../nginx_mod_h264_streaming-2.2.7
+
+修改objs/Makefile，去掉其中的-Werror
+
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;常用命令&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 启动
+/usr/local/nginx/sbin/nginx
+
+# 停止
+/usr/local/nginx/sbin/nginx -s stop
+
+# 重新加载配置
+/usr/local/nginx/sbin/nginx -s reload
+&lt;/pre&gt;&lt;/div&gt;</content><category term="nginx"></category><category term="centos"></category></entry><entry><title>git笔记</title><link href="http://liguangsheng.github.io/gitbi-ji.html" rel="alternate"></link><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-03:/gitbi-ji.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 克隆仓库
 git clone &amp;lt;url&amp;gt; &amp;lt;localpath&amp;gt;
 
 # 查看分支
