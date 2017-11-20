@@ -99,6 +99,40 @@ fg [id] # 将进程切到前台运行
 <p>openssh 要求密码，提示<code>passphrase length hidden intenationlly</code></p>
 <div class="highlight"><pre><span></span>ssh-copy-id localhost
 </pre></div>
+
+
+<h2>SSH断开后，使进程仍在后台运行</h2>
+<ol>
+<li>nohup
+run a command immune to hangups, with output to a non-tty</li>
+</ol>
+<div class="highlight"><pre><span></span>nohup ping www.baidu.com &gt; /dev/null &amp;
+</pre></div>
+
+
+<ol>
+<li>setsid
+Run a program in a new session.</li>
+</ol>
+<div class="highlight"><pre><span></span>setsid ping baidu.com &gt; /dev/null
+</pre></div>
+
+
+<ol>
+<li>将&amp;也放入()中执行命令</li>
+</ol>
+<div class="highlight"><pre><span></span>(ping baidu.com &gt; /dev/null &amp;)
+</pre></div>
+
+
+<ol>
+<li>disown</li>
+</ol>
+<p>dosown 使作业能够忽略HUP信号</p>
+<p>disown: usage: disown [-h] [-ar] [jobspec ...]</p>
+<ol>
+<li>screen</li>
+</ol>
 	</div>
 	<footer class="post-footer">
         <div class="post-eof"></div>
