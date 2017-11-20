@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/all.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-11-18T13:32:00+08:00</updated><entry><title>Python参数传递pass by what?</title><link href="http://liguangsheng.github.io/pythoncan-shu-chuan-di-pass-by-what.html" rel="alternate"></link><published>2017-08-11T16:52:00+08:00</published><updated>2017-08-15T09:26:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-08-11:/pythoncan-shu-chuan-di-pass-by-what.html</id><summary type="html">&lt;h2&gt;参数的传递归根到底是赋值操作&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Li Guangsheng's Blog</title><link href="http://liguangsheng.github.io/" rel="alternate"></link><link href="http://liguangsheng.github.io/feeds/all.atom.xml" rel="self"></link><id>http://liguangsheng.github.io/</id><updated>2017-11-20T14:53:00+08:00</updated><entry><title>TestDocument</title><link href="http://liguangsheng.github.io/testdocument.html" rel="alternate"></link><published>2017-11-20T00:00:00+08:00</published><updated>2017-11-20T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-11-20:/testdocument.html</id><summary type="html">&lt;p&gt;This is a teds Markdown document.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a teds Markdown document.&lt;/p&gt;</content></entry><entry><title>Python参数传递pass by what?</title><link href="http://liguangsheng.github.io/pythoncan-shu-chuan-di-pass-by-what.html" rel="alternate"></link><published>2017-08-11T16:52:00+08:00</published><updated>2017-08-15T09:26:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-08-11:/pythoncan-shu-chuan-di-pass-by-what.html</id><summary type="html">&lt;h2&gt;参数的传递归根到底是赋值操作&lt;/h2&gt;
 &lt;p&gt;以往说起参数传递时，通常都会谈到按值传递(pass by value)和按引用传递(pass by reference)，然而，这两种传递方式对Python来说好像都不准确。Python的参数传递方式有一种说法是pass by assignment，也就是赋值传递。&lt;/p&gt;
 &lt;p&gt;按值传递，一个外部变量a，如果a代表的是一个值，比如10，它被传递到函数的参数b中时，a的值被赋值到了b中。&lt;/p&gt;
 &lt;p&gt;按引用传递，一个外部变量a，如果a代表的是一个对象，那么a的值，也就是a中实际存储的是这个对象的引用，它被传递到函数的参数b中时，a的值被赋值到了b中，b也是这个对象的引用了。&lt;/p&gt;
@@ -55,7 +55,7 @@
 &lt;p&gt;在多线程编程中，后台确实有多个线程在同时运行，不过GIL的存在使得多个线程中只有一个线程在执行Python代码，其他线程需要等待GIL锁的释放才有机会执行。&lt;/p&gt;
 &lt;p&gt;GIL的好处在于，由于这把大锁的存在，python内的对象默认都是线程安全的，不必额外的再去手动加锁。在开发过程中省了很多事。&lt;/p&gt;
 &lt;p&gt;GIL的坏处在于，由于GIL的存在，是的多线程中实际上只有一个线程在执行python字节码，当一个线程执行的时候，其他的线程都在等待GIL的释放，并没有真正执行。再加上线程上下文切换花费的资源，实际上并不一定比单线程效率高。&lt;/p&gt;
-&lt;p&gt;释放GIL的条件是遇到IO操作或者字节码指令执行了一定的条数，所以对于IO密集的并发操作，Python的多线程还是有用的。&lt;/p&gt;</content><category term="python"></category><category term="gil"></category></entry><entry><title>常用linux命令</title><link href="http://liguangsheng.github.io/chang-yong-linuxming-ling.html" rel="alternate"></link><published>2017-07-21T00:00:00+08:00</published><updated>2017-07-21T00:00:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-21:/chang-yong-linuxming-ling.html</id><summary type="html">&lt;h2&gt;ssh&lt;/h2&gt;
+&lt;p&gt;释放GIL的条件是遇到IO操作或者字节码指令执行了一定的条数，所以对于IO密集的并发操作，Python的多线程还是有用的。&lt;/p&gt;</content><category term="python"></category><category term="gil"></category></entry><entry><title>常用linux命令</title><link href="http://liguangsheng.github.io/chang-yong-linuxming-ling.html" rel="alternate"></link><published>2017-07-21T00:00:00+08:00</published><updated>2017-11-20T14:53:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-21:/chang-yong-linuxming-ling.html</id><summary type="html">&lt;h2&gt;ssh&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# ssh登陆
 # ssh user@host -p port
 ssh lgs@localhost -p 9922
@@ -117,37 +117,28 @@ fg [id] # 将进程切到前台运行
 
 
 &lt;h2&gt;SSH断开后，使进程仍在后台运行&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;nohup
-run a command immune to hangups, with output to a non-tty&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;nohup&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;run a command immune to hangups, with output to a non-tty&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nohup ping www.baidu.com &amp;gt; /dev/null &amp;amp;
+aaa
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;setsid
-Run a program in a new session.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;setsid&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Run a program in a new session.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;setsid ping baidu.com &amp;gt; /dev/null
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;将&amp;amp;也放入()中执行命令&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;将&amp;amp;也放入()中执行命令&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(ping baidu.com &amp;gt; /dev/null &amp;amp;)
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;disown&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;disown&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;dosown 使作业能够忽略HUP信号&lt;/p&gt;
 &lt;p&gt;disown: usage: disown [-h] [-ar] [jobspec ...]&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;screen&lt;/li&gt;
-&lt;/ol&gt;</content><category term="linux"></category></entry><entry><title>ZeroMQ笔记</title><link href="http://liguangsheng.github.io/zeromqbi-ji.html" rel="alternate"></link><published>2017-07-17T12:01:00+08:00</published><updated>2017-07-18T09:30:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-17:/zeromqbi-ji.html</id><summary type="html">&lt;h1&gt;安装&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;screen&lt;/strong&gt;&lt;/p&gt;</content><category term="linux"></category></entry><entry><title>ZeroMQ笔记</title><link href="http://liguangsheng.github.io/zeromqbi-ji.html" rel="alternate"></link><published>2017-07-17T12:01:00+08:00</published><updated>2017-07-18T09:30:00+08:00</updated><author><name>Li Guangsheng</name></author><id>tag:liguangsheng.github.io,2017-07-17:/zeromqbi-ji.html</id><summary type="html">&lt;h1&gt;安装&lt;/h1&gt;
 &lt;p&gt;安装ZeroMQ&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# 下载源代码并解压
 wget https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz
