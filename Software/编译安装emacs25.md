@@ -1,7 +1,8 @@
+---
 Title: 编译安装emacs25
-Date: 2017-05-05 17:37
-Modified: 2017-06-15 17:45
-Tags: centos, emacs
+Date: 2017-05-05
+Modified: 2017-06-15
+---
 
 # 下载源码并解压
 ```

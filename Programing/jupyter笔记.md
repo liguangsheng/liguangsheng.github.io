@@ -1,8 +1,8 @@
+---
 Title: jupyter笔记
 Date: 2016-12-03
 Modified: 2016-12-03
-Category: Programing
-Tags: jupyter, ipython
+---
 
 ```
 # 安装jupyter

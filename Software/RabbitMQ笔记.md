@@ -1,7 +1,8 @@
+---
 Title: RabbitMQ笔记
-Date: 2017-02-07 14:57
-Modified: 2017-07-18 16:51
-Tags: rabbitmq
+Date: 2017-02-07
+Modified: 2017-07-18
+---
 
 # 安装
 ```

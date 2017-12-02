@@ -1,7 +1,8 @@
+---
 Title: Nginx笔记
-Date: 2017-07-08 13:49
-Modified: 2017-11-18 13:32
-Tags: nginx, centos
+Date: 2017-07-08
+Modified: 2017-11-18
+---
 
 # CentOS上编译安装Nginx
 

@@ -1,7 +1,8 @@
+---
 Title: Python中的GIL
-Date: 2017-08-11 16:42
-Modified: 2017-08-15 09:26
-Tags: python, gil
+Date: 2017-08-11
+Modified: 2017-08-15
+---
 
 GIL，全称是Global Interpreter Lock，全局解释器锁。GIL是CPython的一个设计，而不是python语言的特性。官方对GIL解释如下
 

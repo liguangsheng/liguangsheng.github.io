@@ -1,8 +1,8 @@
+---
 Title: rhel/centos笔记
 Date: 2017-07-13
 Modified: 2017-07-13
-Category: Linux
-Tags: linux, rhel, centos
+---
 
 **OS: CentOS 6.8 | RHEL 6.5 **
 ---

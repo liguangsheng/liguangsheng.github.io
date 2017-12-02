@@ -1,11 +1,8 @@
-title: win32实现屏幕找色
-date: 2016-03-12
+---
+Title: win32实现屏幕找色
+Date: 2016-03-12
 Modified: 2016-03-12
-Category: C/C++
-Tags: C, C++, Win32
-Slug: win32-find-color
-Authors: Li Guangsheng
-Summary: Implement FindColor function with win32.
+---
 
 实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。
 

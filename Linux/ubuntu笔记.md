@@ -1,8 +1,8 @@
+---
 Title: ubuntu笔记
 Date: 2017-03-17
 Modified: 2017-03-17
-Category: Linux
-Tags: linux, ubuntu
+---
 
 OS: Ubuntu 16.04 xenial
 Kernel: x86_64 Linux 4.4.0-xx-generic

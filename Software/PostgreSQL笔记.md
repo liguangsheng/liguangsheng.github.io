@@ -1,7 +1,8 @@
+---
 Title: PostgreSQL笔记
-Date: 2017-06-21 10:42
-Modified: 2017-08-24 11:07
-Tags: postgresql
+Date: 2017-06-21
+Modified: 2017-08-24
+---
 
 **数据库**
 ```

@@ -1,8 +1,8 @@
+---
 Title: 常用linux命令
 Date: 2017-07-21
-Modified: 2017-11-20 14:53
-Category: Linux
-Tags: linux
+Modified: 2017-11-20
+---
 
 ## ssh
 ```

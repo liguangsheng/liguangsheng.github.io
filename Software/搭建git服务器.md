@@ -1,7 +1,8 @@
+---
 Title: 搭建git服务器
 Date: 2017-06-28
 Modified: 2017-06-28
-Tags: git, centos
+---
 
 1. 安装git
  ```

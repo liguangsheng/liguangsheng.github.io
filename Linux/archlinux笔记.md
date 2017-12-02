@@ -1,8 +1,8 @@
+---
 Title: archlinux笔记
 Date: 2017-02-09
 Modified: 2017-02-09
-Category: Linux
-Tags: linux, archlinux
+---
 
 Shell: zsh
 窗口管理器: i3wm 

@@ -1,8 +1,8 @@
+---
 Title: pyenv管理Python版本
 Date: 2017-03-19
 Modified: 2017-11-11
-Category: Python
-Tags: Python, pyenv, version
+---
 
 ## 安装
 ```shell

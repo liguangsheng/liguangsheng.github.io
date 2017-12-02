@@ -1,7 +1,8 @@
+---
 Title: rsync笔记
-Date: 2017-06-28 09:56
-Modified: 2017-07-08 16:32
-Tags: linux, rsync
+Date: 2017-06-28
+Modified: 2017-07-08
+---
 
 rsync usage:
 ```

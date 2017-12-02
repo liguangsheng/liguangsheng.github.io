@@ -1,8 +1,8 @@
+---
 Title: linux备份与恢复
 Date: 2017-03-20
 Modified: 2017-03-20
-Category: Linux
-Tags: linux, backup
+---
 
 ## tar
 

@@ -1,7 +1,8 @@
+---
 Title: git笔记
 Date: 2017-07-03
 Modified: 2017-07-03
-Tags: git
+---
 
 ```
 # 克隆仓库

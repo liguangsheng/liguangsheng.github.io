@@ -1,8 +1,8 @@
+---
 Title: linux配置Shadowsocks
 Date: 2017-04-06
 Modified: 2017-04-06
-Category: Linux
-Tags: linux, shadowsocks
+---
 
 ## 安装Shadowsocks
 ```

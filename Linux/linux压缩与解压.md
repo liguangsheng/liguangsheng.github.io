@@ -1,8 +1,8 @@
+---
 Title: linux压缩与解压
 Date: 2017-02-27
 Modified: 2017-02-27
-Category: Linux
-Tags: linux, tar
+---
 
 ## .tar
 

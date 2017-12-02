@@ -1,7 +1,8 @@
+---
 Title: VirtualBox克隆虚拟机后重新初始化网卡
-Date: 2017-01-22 15:21
-Modified: 2017-06-15 17:45
-Tags: virtualbox
+Date: 2017-01-22
+Modified: 2017-06-15
+---
 
 VirtualBox重新初始化虚拟机后，新虚拟机会重新生成两张不一样的网卡。
 

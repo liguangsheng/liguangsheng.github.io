@@ -1,7 +1,8 @@
+---
 Title: Kafka笔记
-Date: 2016-06-17 21:14
-Modified: 2017-07-17 22:24
-Tags: kafka
+Date: 2016-06-17
+Modified: 2017-07-17
+---
 
 # 安装
 访问`http://kafka.apache.org/downloads`下载对应Scala版本的Kafka下载即可
