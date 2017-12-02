@@ -28,6 +28,7 @@ class MarkdownFile(object):
         self.title = self.metadata['title']
         self.date = self.metadata['date']
         self.modified = self.metadata['modified']
+        self.top = self.metadata.get('top') or False
 
 
 def markdown_files():
@@ -36,7 +37,6 @@ def markdown_files():
         for file in files:
             if file.endswith('.md') and not file == 'README.md':
                 md_files.append(MarkdownFile(os.path.join(root, file)))
-
     return sorted(md_files, key=lambda x:x.metadata['modified'], reverse=True)
 
 
