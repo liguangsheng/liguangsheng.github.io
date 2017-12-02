@@ -13,7 +13,7 @@ for root, dirs, files in os.walk('.'):
 with open('README.md', 'w', encoding='utf-8') as index_file:
     for markdown_file in markdown_files:
         name = markdown_file[0][:-3]
-        url = markdown_file[1]
+        url = markdown_file[1][2:]
         item = '* [{}]({})'.format(name, url)
         print(item)
         index_file.write(item + '\n')
