@@ -3,4 +3,4 @@
 
 **来源于网络**
 
-[[regex][../assets/regex.png]]
+[[regex][assets/regex.png]]
