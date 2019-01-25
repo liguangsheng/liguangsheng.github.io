@@ -4,4 +4,4 @@
 
 * Contents
 
-- ![Python中的GIL](./Python/Python中的GIL)
+- [[./Python/Python中的GIL][Python中的GIL]]
