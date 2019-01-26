@@ -6,21 +6,10 @@
     <description>Recent content on Li Guangsheng</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Jan 2019 22:22:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 26 Jan 2019 16:19:20 +0800</lastBuildDate>
     
 	<atom:link href="http://liguangsheng.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Github Pages出现ERR_CONNECTION_RESET</title>
-      <link>http://liguangsheng.github.io/post/github-pages-err-reset/</link>
-      <pubDate>Sat, 26 Jan 2019 22:22:32 +0800</pubDate>
-      
-      <guid>http://liguangsheng.github.io/post/github-pages-err-reset/</guid>
-      <description>刚才加了一篇文章后，访问博客出现了ERR_CONNECTION_RESET错误，一直打不开。
-原因是文章中的某些关键词被GFW屏蔽了
-解决办法是去掉关键词，或者在github的设置里面勾上强制https</description>
-    </item>
     
     <item>
       <title>TCP协议三次握手四次挥手</title>
@@ -32,6 +21,17 @@
 1）可靠地实现TCP全双工连接的终止
 TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关闭连接的一端（后面统称A端）发出的，如果这个ACK丢失，对方（后面统称B端）将重发出最终的FIN，因此A端必须维护状态信息（TIME_WAIT）允许它重发最终的ACK。如果A端不维持TIME_WAIT状态，而是处于CLOSED 状态，那么A端将响应RST分节，B端收到后将此分节解释成一个错误（在java中会抛出connection reset的SocketException)。
 因而，要实现TCP全双工连接的正常终止，必须处理终止过程中四个分节任何一个分节的丢失情况，主动关闭连接的A端必须维持TIME_WAIT状态 。</description>
+    </item>
+    
+    <item>
+      <title>Github Pages出现ERR_CONNECTION_RESET</title>
+      <link>http://liguangsheng.github.io/post/github-pages-err-reset/</link>
+      <pubDate>Thu, 26 Jul 2018 22:22:32 +0800</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/github-pages-err-reset/</guid>
+      <description>刚才加了一篇文章后，访问博客出现了ERR_CONNECTION_RESET错误，一直打不开。
+原因是文章中的某些关键词被GFW屏蔽了
+解决办法是去掉关键词，或者在github的设置里面勾上强制https</description>
     </item>
     
     <item>
