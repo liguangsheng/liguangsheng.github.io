@@ -41,7 +41,7 @@ TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关�
       
       <guid>http://liguangsheng.github.io/post/go-scheduler/</guid>
       <description>主要概念 goroutine调度器有三个主要概念
- G(goroutine): 代表一个goroutine M(machine): 代表一个worker thread或者说是machine, 目前的实现版本中对应的就是一个OS的线程 P(processor: 代表一个执行go代码的实体  当M想要执行Go代码时，必须有一个相应的P才能执行。
+ G(goroutine): 代表一个goroutine M(machine): 代表一个worker thread或者说是machine, 目前的实现版本中对应的就是一个OS的线程 P(processor): 代表一个执行go代码的实体  当M想要执行Go代码时，必须有一个相应的P才能执行。
 struct P { Lock; G *gfree; // freelist, moved from sched G *ghead; // runnable, moved from sched G *gtail; MCache *mcache; // moved from M FixAlloc *stackalloc; // moved from M uint64 ncgocall; GCStats gcstats; // etc ... }; P *allp; // [GOMAXPROCS]  P的数量由GOMAXPROCS来控制，所有的P都存储在一个实现了work-stealin调度算法的数组里。每当GOMAXPROCS变化时，都会发生stop/start the world，然后调整P的数量。
 P *idlep; // lock-free list  同时还有一个存储空闲P的idlep列表，每次M想要执行Go代码时，会从idlep列表里面取一个P，用完了再放回去。
 调度过程 当创建一个新的G或者一个已经存在的G将要运行时，都会把这个G放到当前的P的goroutine队列里面。每次P都从这个队列里拿一个G出来运行，如果拿不到，就随机选择另一个P2，把P2的goroutine队列偷一半过来。</description>
