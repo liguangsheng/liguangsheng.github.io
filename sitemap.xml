@@ -3,23 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://liguangsheng.github.io/about/</loc>
-    <lastmod>2019-01-26T16:52:49+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://liguangsheng.github.io/post/tcp-handshake/</loc>
     <lastmod>2019-01-26T20:02:14+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://liguangsheng.github.io/post/go-scheduler/</loc>
-    <lastmod>2019-01-26T21:46:59+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://liguangsheng.github.io/post/python-gil/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
   </url>
   
   <url>
@@ -59,7 +49,7 @@
   
   <url>
     <loc>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
   </url>
   
   <url>
@@ -79,12 +69,12 @@
   
   <url>
     <loc>http://liguangsheng.github.io/post/win32-find-color/</loc>
-    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/tags/c/</loc>
-    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,7 +103,7 @@
   
   <url>
     <loc>http://liguangsheng.github.io/tags/gil/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,14 +114,8 @@
   </url>
   
   <url>
-    <loc>http://liguangsheng.github.io/tags/go/</loc>
-    <lastmod>2019-01-26T21:46:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://liguangsheng.github.io/</loc>
-    <lastmod>2019-01-26T16:52:49+08:00</lastmod>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -167,13 +151,13 @@
   
   <url>
     <loc>http://liguangsheng.github.io/tags/pyenv/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/tags/python/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -191,7 +175,7 @@
   
   <url>
     <loc>http://liguangsheng.github.io/tags/</loc>
-    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -215,7 +199,7 @@
   
   <url>
     <loc>http://liguangsheng.github.io/tags/win32/</loc>
-    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <lastmod>2019-01-26T22:00:26+08:00</lastmod>
     <priority>0</priority>
   </url>
   
