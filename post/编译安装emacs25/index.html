@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>编译安装emacs25</title>
     
 
 
@@ -60,55 +60,40 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>编译安装emacs25</h2>
+        
+
+<h1 id="下载源码并解压">下载源码并解压</h1>
+
+<pre><code>wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz
+tar xzvf emacs-25.2.tar.gz
+cd emacs-25.2
+</code></pre>
+
+<h1 id="安装编译依赖">安装编译依赖</h1>
+
+<pre><code>yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo  libjpeg-turbo-devel giflib giflib-devel
+</code></pre>
+
+<h1 id="编译">编译</h1>
+
+<pre><code>./configure --prefix=/usr/local/emacs-25
+make
+make install
+</code></pre>
+
+<p>make时出现了<code>aclocal-1.5.1 missing</code>的错误，执行<code>autoreconf -f -i</code>后再make。</p>
+
+<p><code>make install</code>时出现<code>makeinfo command not found</code>，执行<code>yum install texinfo</code>。</p>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

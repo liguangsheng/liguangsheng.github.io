@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/python/</link>
+    <description>Recent content in Python on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 11 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python参数传递pass by what?</title>
+      <link>http://liguangsheng.github.io/post/python-pass-by-what/</link>
+      <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/python-pass-by-what/</guid>
+      <description>参数的传递归根到底是赋值操作 以往说起参数传递时，通常都会谈到按值传递(pass by value)和按引用传递(pass by reference)，然而，这两种传递方式对Python来说好像都不准确。Python的参数传递方式有一种说法是pass by assignment，也就是赋值传递。
+按值传递，一个外部变量a，如果a代表的是一个值，比如10，它被传递到函数的参数b中时，a的值被赋值到了b中。
+按引用传递，一个外部变量a，如果a代表的是一个对象，那么a的值，也就是a中实际存储的是这个对象的引用，它被传递到函数的参数b中时，a的值被赋值到了b中，b也是这个对象的引用了。
+也就是说，所谓按值传递和按引用传递都只是一个赋值操作。对于基本类型，或者说值类型，赋值操作会直接覆盖掉原来的值；对于引用类型，赋值操作会直接覆盖掉原来的地址，但是地址上的对象并不会有任何改变。
+而在Python中，一切都是对象。所以Python中参数的传递都是传递的对象的引用。包括int，float等类型都是对象。所以，在下面这个例子中，change函数并不能改变a的数值。
+In [1]: def change(v): ...: v = 42 ...: In [2]: a = 1 In [3]: change(a) In [4]: a Out[4]: 1  对象有可变对象和不可变对象之分 Python中一切都是对象，但对象是经过封装的，有可变对象和不可变对象之分。在刚才的例子中a的类型是int，int是一个不可变的类型。在函数change中对v进行赋值操作时，会生成一个新的对象，然后v中的地址变成了新对象的地址。
+In [1]: def change(v): ...: v.append(42) ...: In [2]: l = [1, 2, 3] In [3]: id(l) Out[3]: 1888404847368 In [4]: change(l) In [5]: l Out[5]: [1, 2, 3, 42] In [6]: id(l) Out[6]: 1888404847368  在这个例子中，list是可变对象，调用v.</description>
+    </item>
+    
+  </channel>
+</rss>

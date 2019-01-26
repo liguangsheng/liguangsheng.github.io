@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>VirtualBox克隆虚拟机后重新初始化网卡</title>
     
 
 
@@ -60,55 +60,54 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>VirtualBox克隆虚拟机后重新初始化网卡</h2>
+        <p>VirtualBox重新初始化虚拟机后，新虚拟机会重新生成两张不一样的网卡。</p>
+
+<p>系统会扫描新生成的网卡，添加到<code>/etc/udev/rules.d/70-persistent-net.rules</code>中。删除多余的网卡，只剩下两条，将名称改为<code>eth0</code>和<code>eth1</code>，将<code>ATTR{address}</code>修改为对应的MAC地址。</p>
+
+<pre><code>cat /etc/udev/rules.d/70-persistent-net.rules
+
+# PCI device 0x8086:0x100e (e1000)
+SUBSYSTEM==&quot;net&quot;, ACTION==&quot;add&quot;, DRIVERS==&quot;?*&quot;, ATTR{address}==&quot;08:00:27:20:2b:d6&quot;, ATTR{type}==&quot;1&quot;, KERNEL==&quot;eth*&quot;, NAME=&quot;eth0&quot;
+
+# PCI device 0x8086:0x100e (e1000)
+SUBSYSTEM==&quot;net&quot;, ACTION==&quot;add&quot;, DRIVERS==&quot;?*&quot;, ATTR{address}==&quot;08:00:27:bc:43:e8&quot;, ATTR{type}==&quot;1&quot;, KERNEL==&quot;eth*&quot;, NAME=&quot;eth1&quot;
+</code></pre>
+
+<p>在<code>/etc/sysconfig/network-scripts</code>下删除多余的ifcfg-eth*，并建立ifcfg-eth0和ifcfg-eth1。</p>
+
+<pre><code>cat ifcfg-eth0 
+DEVICE=eth0
+BOOTPROTO=dhcp
+IPV6INIT=yes
+NM_CONTROLLED=no
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+PEERDNS=yes
+</code></pre>
+
+<pre><code>cat ifcfg-eth1 
+DEVICE=eth1
+BOOTPROTO=dhcp
+IPV6INIT=yes
+NM_CONTROLLED=no
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+PEERDNS=yes
+</code></pre>
+
+<p>重启。</p>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

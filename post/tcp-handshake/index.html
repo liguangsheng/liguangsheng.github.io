@@ -118,8 +118,9 @@
 
 <h2 id="为什么需要time-wait状态在2msl时间之后才变为closed">为什么需要TIME_WAIT状态在2MSL时间之后才变为CLOSED？</h2>
 
-<p>TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因:
-1）可靠地实现TCP全双工连接的终止</p>
+<p>TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因:</p>
+
+<p>1）可靠地实现TCP全双工连接的终止</p>
 
 <p>TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关闭连接的一端（后面统称A端）发出的，如果这个ACK丢失，对方（后面统称B端）将重发出最终的FIN，因此A端必须维护状态信息（TIME_WAIT）允许它重发最终的ACK。如果A端不维持TIME_WAIT状态，而是处于CLOSED 状态，那么A端将响应RST分节，B端收到后将此分节解释成一个错误（在java中会抛出connection reset的SocketException)。</p>
 

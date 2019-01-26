@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>win32实现屏幕找色</title>
     
 
 
@@ -60,55 +60,70 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>win32实现屏幕找色</h2>
+        <p>实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。</p>
+
+<p>win32中有个函数叫做GetPixel()，这个函数可以用来获取屏幕上某个点的RGB值，用这个函数虽然可以实现我们的目标，但是在目标区域较大的情况下，GetPixel()存在严重的效率问题，找色非！常！慢！</p>
+
+<p>这里有一种效率比较高的屏幕找色函数的实现，主要步骤是：</p>
+
+<ol>
+<li>使用BitBlt函数将屏幕贴图到内存兼容DC中</li>
+<li>使用GetBitmapBits函数将bitmap图片的所有颜色值一次性输入到缓冲区中</li>
+<li>将缓冲区中的颜色值与目标颜色进行比对</li>
+</ol>
+
+<p>实现代码如下：</p>
+
+<pre><code class="language-c">// 在rect的矩形区域内查找颜色为rgb的像素点
+POINT FindColor(RECT rect, DWORD rgb)
+{
+    HDC ScreenDC = GetDC(NULL);
+    HDC memScreenDC = CreateCompatibleDC(ScreenDC);
+    int width = rect.right - rect.left;
+    int height = rect.bottom - rect.top;
+
+    HBITMAP hBitmap = CreateCompatibleBitmap(GetDC(NULL), width, height);
+    HGDIOBJ hOldbmp = SelectObject(memScreenDC, hBitmap);
+
+    BitBlt(memScreenDC, 0, 0, width, height, ScreenDC, rect.left, rect.top, SRCCOPY);
+    SelectObject(memScreenDC, hOldbmp);
+
+    BYTE *bmpBuffer = new BYTE[width*height * 4];
+    GetBitmapBits(hBitmap, width*height * 4, bmpBuffer);
+
+    DeleteObject(hBitmap);
+    DeleteDC(memScreenDC);
+
+    for (int row = 0; row &lt; height; row++)
+    {
+        for (int col = 0; col &lt; width; col++)
+        {
+            int b = bmpBuffer[row * width * 4 + col * 4];
+            int g = bmpBuffer[row * width * 4 + col * 4 + 1];
+            int r = bmpBuffer[row * width * 4 + col * 4 + 2];
+            if (r == GetRValue(rgb) &amp;&amp; g == GetGValue(rgb) &amp;&amp; b == GetBValue(rgb))
+            {
+                delete bmpBuffer;
+                return POINT{ col, row };
+            }
+        }
+    }
+    delete bmpBuffer;
+    return POINT{ -1,-1 };
+}
+</code></pre>
+
+<p>这个函数在1366*768的矩形区域中找色一次耗时大约40ms，效率还算可以。如果需要大量使用，则可以修改代码，不要重复的创建和删除资源，比如创建DC和删除DC，分配缓冲区和回收缓冲区。</p>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

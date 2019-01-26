@@ -4,12 +4,82 @@
   
   <url>
     <loc>http://liguangsheng.github.io/about/</loc>
-    <lastmod>2019-01-26T16:19:48+08:00</lastmod>
+    <lastmod>2019-01-26T16:52:49+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/post/tcp-handshake/</loc>
-    <lastmod>2019-01-26T16:19:20+08:00</lastmod>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/go-scheduler/</loc>
+    <lastmod>2019-01-26T21:46:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/python-gil/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/python-pass-by-what/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/zeromq%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/nginx%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-11-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/rsync%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85emacs25/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/linux-setup-shadowsocks/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/virtualbox%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E5%8D%A1/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/mysql%E8%BF%9E%E6%8E%A5%E6%AC%A1%E6%95%B0%E8%BF%87%E5%A4%9A%E6%8A%A5%E9%94%99/</loc>
+    <lastmod>2017-07-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/win32-find-color/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
   </url>
   
   <url>
@@ -18,19 +88,140 @@
   </url>
   
   <url>
+    <loc>http://liguangsheng.github.io/tags/cc/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/centos/</loc>
+    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/centos-emacs/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/close_wait/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/git/</loc>
+    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/go/</loc>
+    <lastmod>2019-01-26T21:46:59+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://liguangsheng.github.io/</loc>
-    <lastmod>2019-01-26T16:19:48+08:00</lastmod>
+    <lastmod>2019-01-26T16:52:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/linux/</loc>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/mactype-virtualbox/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/mysql/</loc>
+    <lastmod>2017-07-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/nginx-centos/</loc>
+    <lastmod>2017-11-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/post/</loc>
-    <lastmod>2019-01-26T16:19:20+08:00</lastmod>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/python/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/python-gil/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/python-pyenv/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/rsync/</loc>
+    <lastmod>2017-07-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/shadowsocks/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/tags/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/tcp/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/time_wait/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/virtualbox/</loc>
+    <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/win32/</loc>
+    <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/zeromq/</loc>
+    <lastmod>2017-07-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

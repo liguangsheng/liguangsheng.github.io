@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>Goroutine调度器过程</title>
     
 
 
@@ -60,55 +60,66 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>Goroutine调度器过程</h2>
+        
+
+<h2 id="主要概念">主要概念</h2>
+
+<p>goroutine调度器有三个主要概念</p>
+
+<ul>
+<li>G(goroutine): 代表一个goroutine</li>
+<li>M(machine): 代表一个worker thread或者说是machine, 目前的实现版本中对应的就是一个OS的线程</li>
+<li>P(processor: 代表一个执行go代码的实体</li>
+</ul>
+
+<p>当M想要执行Go代码时，必须有一个相应的P才能执行。</p>
+
+<pre><code class="language-c">struct P
+{
+    Lock;
+    G *gfree; // freelist, moved from sched
+    G *ghead; // runnable, moved from sched
+    G *gtail;
+    MCache *mcache; // moved from M
+    FixAlloc *stackalloc; // moved from M
+    uint64 ncgocall;
+    GCStats gcstats;
+    // etc
+    ...
+};
+
+P *allp; // [GOMAXPROCS]
+
+</code></pre>
+
+<p>P的数量由GOMAXPROCS来控制，所有的P都存储在一个实现了work-stealin调度算法的数组里。每当GOMAXPROCS变化时，都会发生stop/start the world，然后调整P的数量。</p>
+
+<pre><code class="language-c">P *idlep; // lock-free list
+</code></pre>
+
+<p>同时还有一个存储空闲P的idlep列表，每次M想要执行Go代码时，会从idlep列表里面取一个P，用完了再放回去。</p>
+
+<h2 id="调度过程">调度过程</h2>
+
+<p><img src="/go-scheduler.jpg" alt="go-scheduler" /></p>
+
+<p>当创建一个新的G或者一个已经存在的G将要运行时，都会把这个G放到当前的P的goroutine队列里面。每次P都从这个队列里拿一个G出来运行，如果拿不到，就随机选择另一个P2，把P2的goroutine队列偷一半过来。</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://docs.google.com/document/d/1TTj4T2JO42uD5ID9e89oa0sLKhJYD0Y_kqxDv3I3XMw/edit#">Scalable Go Scheduler Design Doc</a></li>
+</ul>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

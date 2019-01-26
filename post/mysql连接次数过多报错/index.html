@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>MySQL连接次数过多报错</title>
     
 
 
@@ -60,55 +60,46 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>MySQL连接次数过多报错</h2>
+        
+
+<h2 id="mysql-连接报错">MySQL 连接报错</h2>
+
+<blockquote>
+<p>&ldquo;Host &lsquo;10.7.30.133&rsquo; is blocked because of many connection errors; unblock with &lsquo;mysqladmin flush-hosts&rsquo;&rdquo;</p>
+</blockquote>
+
+<h2 id="解决方法">解决方法</h2>
+
+<h3 id="增加最大错误连接数">增加最大错误连接数</h3>
+
+<pre><code class="language-shell">mysql&gt; use mysql;
+# 查看最大错误连接数
+mysql&gt; show variables like '%max_connect_errors%'
+# 修改最大错误连接数
+mysql&gt; set global max_connect_errors = 1000;
+# 查看修改结果
+mysql&gt; show variables like '%max_connect_errors%'
+</code></pre>
+
+<h3 id="重置计数器">重置计数器</h3>
+
+<pre><code class="language-shell">mysql&gt; flush hosts;
+</code></pre>
+
+<p>或者</p>
+
+<pre><code class="language-shell">$ mysqladmin flush-hosts
+</code></pre>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

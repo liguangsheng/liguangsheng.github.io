@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/mysql/</link>
+    <description>Recent content in Mysql on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL连接次数过多报错</title>
+      <link>http://liguangsheng.github.io/post/mysql%E8%BF%9E%E6%8E%A5%E6%AC%A1%E6%95%B0%E8%BF%87%E5%A4%9A%E6%8A%A5%E9%94%99/</link>
+      <pubDate>Mon, 12 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/mysql%E8%BF%9E%E6%8E%A5%E6%AC%A1%E6%95%B0%E8%BF%87%E5%A4%9A%E6%8A%A5%E9%94%99/</guid>
+      <description> MySQL 连接报错  &amp;ldquo;Host &amp;lsquo;10.7.30.133&amp;rsquo; is blocked because of many connection errors; unblock with &amp;lsquo;mysqladmin flush-hosts&amp;rsquo;&amp;rdquo;
+ 解决方法 增加最大错误连接数 mysql&amp;gt; use mysql; # 查看最大错误连接数 mysql&amp;gt; show variables like &#39;%max_connect_errors%&#39; # 修改最大错误连接数 mysql&amp;gt; set global max_connect_errors = 1000; # 查看修改结果 mysql&amp;gt; show variables like &#39;%max_connect_errors%&#39;  重置计数器 mysql&amp;gt; flush hosts;  或者
+$ mysqladmin flush-hosts  </description>
+    </item>
+    
+  </channel>
+</rss>

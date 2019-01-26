@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>Python参数传递pass by what?</title>
     
 
 
@@ -60,55 +60,66 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>Python参数传递pass by what?</h2>
+        
+
+<h2 id="参数的传递归根到底是赋值操作">参数的传递归根到底是赋值操作</h2>
+
+<p>以往说起参数传递时，通常都会谈到按值传递(pass by value)和按引用传递(pass by reference)，然而，这两种传递方式对Python来说好像都不准确。Python的参数传递方式有一种说法是pass by assignment，也就是赋值传递。</p>
+
+<p>按值传递，一个外部变量a，如果a代表的是一个值，比如10，它被传递到函数的参数b中时，a的值被赋值到了b中。</p>
+
+<p>按引用传递，一个外部变量a，如果a代表的是一个对象，那么a的值，也就是a中实际存储的是这个对象的引用，它被传递到函数的参数b中时，a的值被赋值到了b中，b也是这个对象的引用了。</p>
+
+<p>也就是说，所谓按值传递和按引用传递都只是一个赋值操作。对于基本类型，或者说值类型，赋值操作会直接覆盖掉原来的值；对于引用类型，赋值操作会直接覆盖掉原来的地址，但是地址上的对象并不会有任何改变。</p>
+
+<p>而在Python中，一切都是对象。所以Python中参数的传递都是传递的对象的引用。包括int，float等类型都是对象。所以，在下面这个例子中，change函数并不能改变a的数值。</p>
+
+<pre><code class="language-python">In [1]: def change(v):
+   ...:     v = 42
+   ...:
+
+In [2]: a = 1
+
+In [3]: change(a)
+
+In [4]: a
+Out[4]: 1
+
+</code></pre>
+
+<h2 id="对象有可变对象和不可变对象之分">对象有可变对象和不可变对象之分</h2>
+
+<p>Python中一切都是对象，但对象是经过封装的，有可变对象和不可变对象之分。在刚才的例子中a的类型是int，int是一个不可变的类型。在函数change中对v进行赋值操作时，会生成一个新的对象，然后v中的地址变成了新对象的地址。</p>
+
+<pre><code class="language-python">In [1]: def change(v):
+   ...:     v.append(42)
+   ...:
+
+In [2]: l = [1, 2, 3]
+
+In [3]: id(l)
+Out[3]: 1888404847368
+
+In [4]: change(l)
+
+In [5]: l
+Out[5]: [1, 2, 3, 42]
+
+In [6]: id(l)
+Out[6]: 1888404847368
+</code></pre>
+
+<p>在这个例子中，list是可变对象，调用v.append(42)时，调用的是v指向的对象的append方法，改变的v指向的对象的值。</p>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

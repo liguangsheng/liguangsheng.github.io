@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/git/</link>
+    <description>Recent content in Git on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>搭建git服务器</title>
+      <link>http://liguangsheng.github.io/post/%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>安装git
+yum install git  添加用户git并切换到git用户来运行git服务
+useradd git passwd git su git  创建相应的ssh目录
+mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys  切换到一个空的目录来存放git仓库
+mkdir -p /opt/git/project.git cd /opt/git chown -R git:git project.git cd project.git git init --bare  禁用shell登录，将/etc/passwd中的
+git:x:1001:1001:,,,:/home/git:/bin/bash  改为
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell  赋予使用者权限，将授权使用git的ssh公钥收集到~/.ssh/authorizes_keys中
+ 使用git
+git clone git@&amp;lt;server_address&amp;gt;:/opt/git/project.git Cloning into &#39;project&#39;... warning: You appear to have cloned an empty repository.  git clone ssh://&amp;lt;user&amp;gt;@&amp;lt;server&amp;gt;:&amp;lt;port&amp;gt;&amp;lt;path&amp;gt; git clone ssh://root@xxx.</description>
+    </item>
+    
+  </channel>
+</rss>

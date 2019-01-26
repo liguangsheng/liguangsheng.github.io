@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>搭建git服务器</title>
     
 
 
@@ -60,55 +60,67 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>搭建git服务器</h2>
+        <ol>
+<li><p>安装git</p>
+
+<pre><code>yum install git
+</code></pre></li>
+
+<li><p>添加用户git并切换到git用户来运行git服务</p>
+
+<pre><code>useradd git
+passwd git
+su git
+</code></pre></li>
+
+<li><p>创建相应的ssh目录</p>
+
+<pre><code>mkdir .ssh &amp;&amp; chmod 700 .ssh
+touch .ssh/authorized_keys &amp;&amp; chmod 600 .ssh/authorized_keys
+</code></pre></li>
+
+<li><p>切换到一个空的目录来存放git仓库</p>
+
+<pre><code>mkdir -p /opt/git/project.git
+cd /opt/git
+chown -R git:git project.git
+cd project.git
+git init --bare
+</code></pre></li>
+
+<li><p>禁用shell登录，将<code>/etc/passwd</code>中的</p>
+
+<pre><code>git:x:1001:1001:,,,:/home/git:/bin/bash
+</code></pre>
+
+<p>改为</p>
+
+<pre><code>git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+</code></pre></li>
+
+<li><p>赋予使用者权限，将授权使用git的ssh公钥收集到<code>~/.ssh/authorizes_keys</code>中</p></li>
+
+<li><p>使用git</p>
+
+<pre><code>git clone git@&lt;server_address&gt;:/opt/git/project.git
+Cloning into 'project'...
+warning: You appear to have cloned an empty repository.
+</code></pre>
+
+<pre><code>git clone ssh://&lt;user&gt;@&lt;server&gt;:&lt;port&gt;&lt;path&gt;
+git clone ssh://root@xxx.xxx.xxx.xxx:28802/opt/git/proje ct.git
+</code></pre></li>
+</ol>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

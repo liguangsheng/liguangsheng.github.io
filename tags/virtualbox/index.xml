@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtualbox on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/virtualbox/</link>
+    <description>Recent content in Virtualbox on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/virtualbox/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VirtualBox克隆虚拟机后重新初始化网卡</title>
+      <link>http://liguangsheng.github.io/post/virtualbox%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E5%8D%A1/</link>
+      <pubDate>Sun, 22 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/virtualbox%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E5%8D%A1/</guid>
+      <description>VirtualBox重新初始化虚拟机后，新虚拟机会重新生成两张不一样的网卡。
+系统会扫描新生成的网卡，添加到/etc/udev/rules.d/70-persistent-net.rules中。删除多余的网卡，只剩下两条，将名称改为eth0和eth1，将ATTR{address}修改为对应的MAC地址。
+cat /etc/udev/rules.d/70-persistent-net.rules # PCI device 0x8086:0x100e (e1000) SUBSYSTEM==&amp;quot;net&amp;quot;, ACTION==&amp;quot;add&amp;quot;, DRIVERS==&amp;quot;?*&amp;quot;, ATTR{address}==&amp;quot;08:00:27:20:2b:d6&amp;quot;, ATTR{type}==&amp;quot;1&amp;quot;, KERNEL==&amp;quot;eth*&amp;quot;, NAME=&amp;quot;eth0&amp;quot; # PCI device 0x8086:0x100e (e1000) SUBSYSTEM==&amp;quot;net&amp;quot;, ACTION==&amp;quot;add&amp;quot;, DRIVERS==&amp;quot;?*&amp;quot;, ATTR{address}==&amp;quot;08:00:27:bc:43:e8&amp;quot;, ATTR{type}==&amp;quot;1&amp;quot;, KERNEL==&amp;quot;eth*&amp;quot;, NAME=&amp;quot;eth1&amp;quot;  在/etc/sysconfig/network-scripts下删除多余的ifcfg-eth*，并建立ifcfg-eth0和ifcfg-eth1。
+cat ifcfg-eth0 DEVICE=eth0 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  cat ifcfg-eth1 DEVICE=eth1 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  重启。</description>
+    </item>
+    
+  </channel>
+</rss>

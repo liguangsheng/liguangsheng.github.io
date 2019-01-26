@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>pyenv管理Python版本</title>
     
 
 
@@ -60,55 +60,109 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>pyenv管理Python版本</h2>
+        
+
+<h2 id="安装">安装</h2>
+
+<pre><code class="language-shell">curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+</code></pre>
+
+<p>添加以下语句到.bashrc并重新source。</p>
+
+<pre><code>export PATH=&quot;/home/&lt;user&gt;/.pyenv/bin:$PATH&quot;
+eval &quot;$(pyenv init -)&quot;
+eval &quot;$(pyenv virtualenv-init -)&quot;
+</code></pre>
+
+<p>运行一下<code>pyenv update</code>。</p>
+
+<h2 id="依赖">依赖</h2>
+
+<p>编译Python时需要一些依赖。
+Ubuntu/Debian:</p>
+
+<pre><code>sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
+</code></pre>
+
+<p>Fedora/CentOS/RHEL:
+FIXME: you may need to install xz to build some CPython version</p>
+
+<pre><code>yum install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+</code></pre>
+
+<p>Mac OS X:</p>
+
+<pre><code>brew install readline xz
+</code></pre>
+
+<p><strong>注意</strong>: libssl-dev is required when compiling Python, installing libssl-dev will actually install zlib1g-dev, which leads to uninstall and re-install Python versions (installed before installing libssl-dev). On Redhat and derivatives the package is named openssl-devel.</p>
+
+<h2 id="pyenv命令">pyenv命令</h2>
+
+<pre><code># 列出所有可用的命令
+pyenv commands
+
+# 更新pyenv
+pyenv update
+
+# 查看当前所有的python版本
+pyenv versions 
+
+# 查看当前激活的python版本
+pyenv version
+
+# 安装指定版本的python
+pyenv install -v [version] 
+
+# 卸载指定版本的python
+pyenv uninstall -v [version]
+
+# 为所有已安装的可执行文件创建 shims，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令
+pyenv rehash
+
+# 指定全局python版本
+pyenv global [version]
+
+# 指定本地面向应用程序的python版本
+pyenv local [version]
+</code></pre>
+
+<h2 id="pyenv与virtualenv配合">pyenv与virtualenv配合</h2>
+
+<pre><code># 新建一个virtualenv
+pyenv virtualenv [version] [venv_name]
+
+# 激活一个virtualenv
+pyenv activate [venv_name]
+
+# 退出virtualenv环境
+pyenv deactivate
+
+# 删除一个virtualenv环境
+pyenv uninstall [venv_name]
+</code></pre>
+
+<p>通过pyenv建立的虚拟环境都在<code>~/.pyenv/versions</code>下，不会出现在应用目录里面</p>
+
+<h2 id="遇到的问题">遇到的问题</h2>
+
+<h3 id="pyenv安装新版本时-默认的源速度比较慢">pyenv安装新版本时，默认的源速度比较慢</h3>
+
+<p>选择国内的镜像站（比如mirrors.sohu.com），手动下载python包，放到<code>~/.pyenv/cache</code>目录下，再安装时会用cache下的包安装。</p>
+
+<pre><code>version=2.7.13 &amp;&amp; wget http://mirrors.sohu.com/python/$version/Python-$version.tar.xz -P ~/.pyenv/cache &amp;&amp; pyenv install -v $version
+</code></pre>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tcp on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/tcp/</link>
+    <description>Recent content in Tcp on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Jan 2019 16:19:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TCP协议三次握手四次挥手</title>
+      <link>http://liguangsheng.github.io/post/tcp-handshake/</link>
+      <pubDate>Sat, 26 Jan 2019 16:19:20 +0800</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/tcp-handshake/</guid>
+      <description>TCP协议的六个标志位  URG 紧急指针，告诉接收TCP模块紧要指针域指着紧要数据。 ACK 置1时表示确认号（为合法，为0的时候表示数据段不包含确认信息，确认号被忽略。 PSH 置1时请求的数据段在接收方得到后就可直接送到应用程序，而不必等到缓冲区满时才传送。 RST 置1时重建连接。如果接收到RST位时候，通常发生了某些错误。 SYN 置1时用来发起一个连接。 FIN 置1时表示发端完成发送任务。用来释放连接，表明发送方已经没有数据发送了。  各个状态的意义  LISTEN - 侦听来自远方TCP端口的连接请求； SYN-SENT -在发送连接请求后等待匹配的连接请求； SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认； FIN-WAIT-2 - 从远程TCP等待连接中断请求； CLOSE-WAIT - 等待从本地用户发来的连接中断请求； CLOSING -等待远程TCP对连接中断的确认； LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； CLOSED - 没有任何连接状态；  三次挥手  client发送数据包，SYN=1,ACK=0,seq=x，状态变为SYN_SEN server接收数据包，状态变为SYN_RECV，然后发送数据包SYN=1,ACK=1,ack=x+1,seq=y， client接收数据包，状态变为ESTABLISHED，然后发送数据包，SYN=1,ACK=1,ack=y+1， server接受数据包，状态变为ESTABLISHED  四次挥手  主动方发送数据包，FIN=1,ACK=0,seq=x，状态变为FIN_WAIT_1 被动方接收数据包，状态变为CLOSE_WAIT，然后发送数据包FIN=0,ACK=1,ack=x+1。此时被动关闭方仍然可以发送还没发送完的数据，主动方接收到数据包后，状态变为FIN_WAIT_2，等待被动方继续发送数据（被动方也可以直接发送FIN=1,ACK=1的数据包，主动方会直接从FIN_WAIT_1变为TIME_WAIT） 被动方发送完数据后，发送数据包FIN=1,ACK=0,seq=y，状态变为LAST_ACK，主动方接收此数据包后，发送数据包FIN=1,ACK=1,ack=y+1，然后状态变为TIME_WAIT，等待2MSL后状态变为CLOSED 被动发接收数据包，状态变为CLOSED  为什么需要TIME_WAIT状态在2MSL时间之后才变为CLOSED？ TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因:
+1）可靠地实现TCP全双工连接的终止
+TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关闭连接的一端（后面统称A端）发出的，如果这个ACK丢失，对方（后面统称B端）将重发出最终的FIN，因此A端必须维护状态信息（TIME_WAIT）允许它重发最终的ACK。如果A端不维持TIME_WAIT状态，而是处于CLOSED 状态，那么A端将响应RST分节，B端收到后将此分节解释成一个错误（在java中会抛出connection reset的SocketException)。
+因而，要实现TCP全双工连接的正常终止，必须处理终止过程中四个分节任何一个分节的丢失情况，主动关闭连接的A端必须维持TIME_WAIT状态 。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shadowsocks on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/shadowsocks/</link>
+    <description>Recent content in Shadowsocks on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Apr 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/shadowsocks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>linux配置Shadowsocks</title>
+      <link>http://liguangsheng.github.io/post/linux-setup-shadowsocks/</link>
+      <pubDate>Thu, 06 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/linux-setup-shadowsocks/</guid>
+      <description> 安装Shadowsocks pip install shadowsocks  服务端配置 shadowsocks配置文件，shadowsocks.json
+{ &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;, &amp;quot;server_port&amp;quot;:1118, &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;, &amp;quot;local_port&amp;quot;:1080, &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;, &amp;quot;timeout&amp;quot;:300, &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot; }  启动ssserver
+ssserver -c shadowsocks.json -d start  关闭ssserver
+ssserver -d stop  客户端配置 shadowsocks配置文件，/etc/shadowsocks/config.json
+{ &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;, &amp;quot;server_port&amp;quot;:1118, &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;, &amp;quot;local_port&amp;quot;:1080, &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;, &amp;quot;timeout&amp;quot;:300, &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot; }  启动shadowsocks客户端
+sslocal -c /etc/shadowsocks/config.json -d start  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mactype Virtualbox on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/mactype-virtualbox/</link>
+    <description>Recent content in Mactype Virtualbox on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 12 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/mactype-virtualbox/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MacType与VirtualBox冲突</title>
+      <link>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</guid>
+      <description> MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。
+解决方法 在MacType的配置文件中加入以下节点
+[ExcludeSub] javaw.exe vbox-img.exe VBoxBalloonCtrl.exe VBoxDTrace.exe VBoxExtPackHelperApp.exe VBoxHeadless.exe VBoxManage.exe VBoxNetDHCP.exe VBoxNetNAT.exe VBoxSDL.exe VBoxSVC.exe VBoxTestOGL.exe VBoxWebSrv.exe VirtualBox.exe  </description>
+    </item>
+    
+  </channel>
+</rss>

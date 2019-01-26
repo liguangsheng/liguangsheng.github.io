@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx Centos on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/nginx-centos/</link>
+    <description>Recent content in Nginx Centos on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/nginx-centos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx笔记</title>
+      <link>http://liguangsheng.github.io/post/nginx%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/nginx%E7%AC%94%E8%AE%B0/</guid>
+      <description>CentOS上编译安装Nginx 首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。
+wget http://nginx.org/download/nginx-1.12.2.tar.gz tar xzvf nginx-1.12.2.tar.gz  (可选)接着下载想要额外添加的模块的源代码
+# rtmp 直播支持 git clone https://github.com/arut/nginx-rtmp-module # mp4 流媒体支持 wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz tar xzvf nginx_mod_h264_streaming-2.2.7.tar.gz  mp4模块还需要修改一下源代码，注释掉nginx_mod_h264_streaming-2.2.7/src/ngx_http_streaming_module.c这个文件中的第158到161行
+157 /* TODO: Win32 */ 158 //if (r-&amp;gt;zero_in_uri) 159 //{ 160 // return NGX_DECLINED; 161 //}  安装编译必要的依赖包，不同的系统包名不同。
+# ubuntu sudo apt-get install openssl libssl-dev libpcre3 libpcre3-dev zlib1g-dev # centos sudo yum -y install pcre-devel openssl openssl-devel  开始编译和安装
+cd nginx-1.12.2 # 进入nginx源码目录 ./configure --prefix=/usr/local/nginx --with-pcre \ --add-module=.</description>
+    </item>
+    
+  </channel>
+</rss>

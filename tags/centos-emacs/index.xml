@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Centos Emacs on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/centos-emacs/</link>
+    <description>Recent content in Centos Emacs on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/centos-emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>编译安装emacs25</title>
+      <link>http://liguangsheng.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85emacs25/</link>
+      <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85emacs25/</guid>
+      <description>下载源码并解压 wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz tar xzvf emacs-25.2.tar.gz cd emacs-25.2  安装编译依赖 yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel giflib giflib-devel  编译 ./configure --prefix=/usr/local/emacs-25 make make install  make时出现了aclocal-1.5.1 missing的错误，执行autoreconf -f -i后再make。
+make install时出现makeinfo command not found，执行yum install texinfo。</description>
+    </item>
+    
+  </channel>
+</rss>

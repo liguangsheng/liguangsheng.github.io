@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     
     
-    <title>Tags</title>
+    <title>Nginx笔记</title>
     
 
 
@@ -60,55 +60,78 @@
 
     
 
-<div class="site-header-content">
-  <div style="font-size:2.3rem; " ><a href="/" class="back" style="color:#2f6f6f;">Home </a></div>
-  <h1 class="site-title">Tags</h1>
-    
-    <h2 class="site-description">&#x2F;&nbsp;
-      
-      
-      <a href="http://liguangsheng.github.io/tags/cc"> cc </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos"> centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/centos-emacs"> centos-emacs </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/close_wait"> close_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/git"> git </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/go"> go </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/linux"> linux </a> (2)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mactype-virtualbox"> mactype-virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/mysql"> mysql </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/nginx-centos"> nginx-centos </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python"> python </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-gil"> python-gil </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/python-pyenv"> python-pyenv </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/rsync"> rsync </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/shadowsocks"> shadowsocks </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/tcp"> tcp </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/time_wait"> time_wait </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/virtualbox"> virtualbox </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/win32"> win32 </a> (1)&nbsp;&#x2F;&nbsp;
-      
-      <a href="http://liguangsheng.github.io/tags/zeromq"> zeromq </a> (1)&nbsp;&#x2F;&nbsp;
-      
-    </h2>
-</div>
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>Nginx笔记</h2>
+        
+
+<h1 id="centos上编译安装nginx">CentOS上编译安装Nginx</h1>
+
+<p>首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。</p>
+
+<pre><code class="language-shell">wget http://nginx.org/download/nginx-1.12.2.tar.gz
+tar xzvf nginx-1.12.2.tar.gz
+</code></pre>
+
+<p>(可选)接着下载想要额外添加的模块的源代码</p>
+
+<pre><code># rtmp 直播支持
+git clone https://github.com/arut/nginx-rtmp-module
+
+# mp4 流媒体支持
+wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz
+tar xzvf nginx_mod_h264_streaming-2.2.7.tar.gz
+</code></pre>
+
+<p>mp4模块还需要修改一下源代码，注释掉<code>nginx_mod_h264_streaming-2.2.7/src/ngx_http_streaming_module.c</code>这个文件中的第158到161行</p>
+
+<pre><code class="language-c">157   /* TODO: Win32 */
+158   //if (r-&gt;zero_in_uri)
+159   //{
+160   //  return NGX_DECLINED;
+161   //}
+</code></pre>
+
+<p>安装编译必要的依赖包，不同的系统包名不同。</p>
+
+<pre><code># ubuntu
+sudo apt-get install openssl libssl-dev libpcre3 libpcre3-dev zlib1g-dev
+
+# centos
+sudo yum -y install pcre-devel openssl openssl-devel
+</code></pre>
+
+<p>开始编译和安装</p>
+
+<pre><code class="language-shell">cd nginx-1.12.2 # 进入nginx源码目录
+./configure --prefix=/usr/local/nginx --with-pcre \
+    --add-module=../nginx-rtmp-module \
+    --add-module=../nginx_mod_h264_streaming-2.2.7
+
+修改objs/Makefile，去掉其中的-Werror
+
+make
+make install
+</code></pre>
+
+<h1 id="常用命令">常用命令</h1>
+
+<pre><code># 启动
+/usr/local/nginx/sbin/nginx
+
+# 停止
+/usr/local/nginx/sbin/nginx -s stop
+
+# 重新加载配置
+/usr/local/nginx/sbin/nginx -s reload
+</code></pre>
+
+  </div>
+
 <footer>
   <hr>
   <small style="font-size:16px;float:right;margin:0 1rem;">

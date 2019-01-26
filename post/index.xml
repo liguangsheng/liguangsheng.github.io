@@ -17,9 +17,193 @@
       <pubDate>Sat, 26 Jan 2019 16:19:20 +0800</pubDate>
       
       <guid>http://liguangsheng.github.io/post/tcp-handshake/</guid>
-      <description>TCP协议的六个标志位  URG 紧急指针，告诉接收TCP模块紧要指针域指着紧要数据。 ACK 置1时表示确认号（为合法，为0的时候表示数据段不包含确认信息，确认号被忽略。 PSH 置1时请求的数据段在接收方得到后就可直接送到应用程序，而不必等到缓冲区满时才传送。 RST 置1时重建连接。如果接收到RST位时候，通常发生了某些错误。 SYN 置1时用来发起一个连接。 FIN 置1时表示发端完成发送任务。用来释放连接，表明发送方已经没有数据发送了。  各个状态的意义  LISTEN - 侦听来自远方TCP端口的连接请求； SYN-SENT -在发送连接请求后等待匹配的连接请求； SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认； FIN-WAIT-2 - 从远程TCP等待连接中断请求； CLOSE-WAIT - 等待从本地用户发来的连接中断请求； CLOSING -等待远程TCP对连接中断的确认； LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； CLOSED - 没有任何连接状态；  三次挥手  client发送数据包，SYN=1,ACK=0,seq=x，状态变为SYN_SEN server接收数据包，状态变为SYN_RECV，然后发送数据包SYN=1,ACK=1,ack=x+1,seq=y， client接收数据包，状态变为ESTABLISHED，然后发送数据包，SYN=1,ACK=1,ack=y+1， server接受数据包，状态变为ESTABLISHED  四次挥手  主动方发送数据包，FIN=1,ACK=0,seq=x，状态变为FIN_WAIT_1 被动方接收数据包，状态变为CLOSE_WAIT，然后发送数据包FIN=0,ACK=1,ack=x+1。此时被动关闭方仍然可以发送还没发送完的数据，主动方接收到数据包后，状态变为FIN_WAIT_2，等待被动方继续发送数据（被动方也可以直接发送FIN=1,ACK=1的数据包，主动方会直接从FIN_WAIT_1变为TIME_WAIT） 被动方发送完数据后，发送数据包FIN=1,ACK=0,seq=y，状态变为LAST_ACK，主动方接收此数据包后，发送数据包FIN=1,ACK=1,ack=y+1，然后状态变为TIME_WAIT，等待2MSL后状态变为CLOSED 被动发接收数据包，状态变为CLOSED  为什么需要TIME_WAIT状态在2MSL时间之后才变为CLOSED？ TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因: 1）可靠地实现TCP全双工连接的终止
+      <description>TCP协议的六个标志位  URG 紧急指针，告诉接收TCP模块紧要指针域指着紧要数据。 ACK 置1时表示确认号（为合法，为0的时候表示数据段不包含确认信息，确认号被忽略。 PSH 置1时请求的数据段在接收方得到后就可直接送到应用程序，而不必等到缓冲区满时才传送。 RST 置1时重建连接。如果接收到RST位时候，通常发生了某些错误。 SYN 置1时用来发起一个连接。 FIN 置1时表示发端完成发送任务。用来释放连接，表明发送方已经没有数据发送了。  各个状态的意义  LISTEN - 侦听来自远方TCP端口的连接请求； SYN-SENT -在发送连接请求后等待匹配的连接请求； SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认； FIN-WAIT-2 - 从远程TCP等待连接中断请求； CLOSE-WAIT - 等待从本地用户发来的连接中断请求； CLOSING -等待远程TCP对连接中断的确认； LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； CLOSED - 没有任何连接状态；  三次挥手  client发送数据包，SYN=1,ACK=0,seq=x，状态变为SYN_SEN server接收数据包，状态变为SYN_RECV，然后发送数据包SYN=1,ACK=1,ack=x+1,seq=y， client接收数据包，状态变为ESTABLISHED，然后发送数据包，SYN=1,ACK=1,ack=y+1， server接受数据包，状态变为ESTABLISHED  四次挥手  主动方发送数据包，FIN=1,ACK=0,seq=x，状态变为FIN_WAIT_1 被动方接收数据包，状态变为CLOSE_WAIT，然后发送数据包FIN=0,ACK=1,ack=x+1。此时被动关闭方仍然可以发送还没发送完的数据，主动方接收到数据包后，状态变为FIN_WAIT_2，等待被动方继续发送数据（被动方也可以直接发送FIN=1,ACK=1的数据包，主动方会直接从FIN_WAIT_1变为TIME_WAIT） 被动方发送完数据后，发送数据包FIN=1,ACK=0,seq=y，状态变为LAST_ACK，主动方接收此数据包后，发送数据包FIN=1,ACK=1,ack=y+1，然后状态变为TIME_WAIT，等待2MSL后状态变为CLOSED 被动发接收数据包，状态变为CLOSED  为什么需要TIME_WAIT状态在2MSL时间之后才变为CLOSED？ TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因:
+1）可靠地实现TCP全双工连接的终止
 TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关闭连接的一端（后面统称A端）发出的，如果这个ACK丢失，对方（后面统称B端）将重发出最终的FIN，因此A端必须维护状态信息（TIME_WAIT）允许它重发最终的ACK。如果A端不维持TIME_WAIT状态，而是处于CLOSED 状态，那么A端将响应RST分节，B端收到后将此分节解释成一个错误（在java中会抛出connection reset的SocketException)。
 因而，要实现TCP全双工连接的正常终止，必须处理终止过程中四个分节任何一个分节的丢失情况，主动关闭连接的A端必须维持TIME_WAIT状态 。</description>
+    </item>
+    
+    <item>
+      <title>Goroutine调度器过程</title>
+      <link>http://liguangsheng.github.io/post/go-scheduler/</link>
+      <pubDate>Thu, 26 Jul 2018 21:05:01 +0800</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/go-scheduler/</guid>
+      <description>主要概念 goroutine调度器有三个主要概念
+ G(goroutine): 代表一个goroutine M(machine): 代表一个worker thread或者说是machine, 目前的实现版本中对应的就是一个OS的线程 P(processor: 代表一个执行go代码的实体  当M想要执行Go代码时，必须有一个相应的P才能执行。
+struct P { Lock; G *gfree; // freelist, moved from sched G *ghead; // runnable, moved from sched G *gtail; MCache *mcache; // moved from M FixAlloc *stackalloc; // moved from M uint64 ncgocall; GCStats gcstats; // etc ... }; P *allp; // [GOMAXPROCS]  P的数量由GOMAXPROCS来控制，所有的P都存储在一个实现了work-stealin调度算法的数组里。每当GOMAXPROCS变化时，都会发生stop/start the world，然后调整P的数量。
+P *idlep; // lock-free list  同时还有一个存储空闲P的idlep列表，每次M想要执行Go代码时，会从idlep列表里面取一个P，用完了再放回去。
+调度过程 当创建一个新的G或者一个已经存在的G将要运行时，都会把这个G放到当前的P的goroutine队列里面。每次P都从这个队列里拿一个G出来运行，如果拿不到，就随机选择另一个P2，把P2的goroutine队列偷一半过来。</description>
+    </item>
+    
+    <item>
+      <title>Python-GIL</title>
+      <link>http://liguangsheng.github.io/post/python-gil/</link>
+      <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/python-gil/</guid>
+      <description>GIL，全称是Global Interpreter Lock，全局解释器锁。GIL是CPython的一个设计，而不是python语言的特性。官方对GIL解释如下
+ In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)
+在CPython中，GIL是用来防止多个线程同时执行python的字节码的，GIL存在的主要原因是CPython的内存管理器并非线程安全的。（然而，有了GIL后，很多其他特性的实现都依赖于GIL）
+ 在多线程编程中，后台确实有多个线程在同时运行，不过GIL的存在使得多个线程中只有一个线程在执行Python代码，其他线程需要等待GIL锁的释放才有机会执行。
+GIL的好处在于，由于这把大锁的存在，python内的对象默认都是线程安全的，不必额外的再去手动加锁。在开发过程中省了很多事。
+GIL的坏处在于，由于GIL的存在，是的多线程中实际上只有一个线程在执行python字节码，当一个线程执行的时候，其他的线程都在等待GIL的释放，并没有真正执行。再加上线程上下文切换花费的资源，实际上并不一定比单线程效率高。
+释放GIL的条件是遇到IO操作或者字节码指令执行了一定的条数，所以对于IO密集的并发操作，Python的多线程还是有用的。</description>
+    </item>
+    
+    <item>
+      <title>Python参数传递pass by what?</title>
+      <link>http://liguangsheng.github.io/post/python-pass-by-what/</link>
+      <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/python-pass-by-what/</guid>
+      <description>参数的传递归根到底是赋值操作 以往说起参数传递时，通常都会谈到按值传递(pass by value)和按引用传递(pass by reference)，然而，这两种传递方式对Python来说好像都不准确。Python的参数传递方式有一种说法是pass by assignment，也就是赋值传递。
+按值传递，一个外部变量a，如果a代表的是一个值，比如10，它被传递到函数的参数b中时，a的值被赋值到了b中。
+按引用传递，一个外部变量a，如果a代表的是一个对象，那么a的值，也就是a中实际存储的是这个对象的引用，它被传递到函数的参数b中时，a的值被赋值到了b中，b也是这个对象的引用了。
+也就是说，所谓按值传递和按引用传递都只是一个赋值操作。对于基本类型，或者说值类型，赋值操作会直接覆盖掉原来的值；对于引用类型，赋值操作会直接覆盖掉原来的地址，但是地址上的对象并不会有任何改变。
+而在Python中，一切都是对象。所以Python中参数的传递都是传递的对象的引用。包括int，float等类型都是对象。所以，在下面这个例子中，change函数并不能改变a的数值。
+In [1]: def change(v): ...: v = 42 ...: In [2]: a = 1 In [3]: change(a) In [4]: a Out[4]: 1  对象有可变对象和不可变对象之分 Python中一切都是对象，但对象是经过封装的，有可变对象和不可变对象之分。在刚才的例子中a的类型是int，int是一个不可变的类型。在函数change中对v进行赋值操作时，会生成一个新的对象，然后v中的地址变成了新对象的地址。
+In [1]: def change(v): ...: v.append(42) ...: In [2]: l = [1, 2, 3] In [3]: id(l) Out[3]: 1888404847368 In [4]: change(l) In [5]: l Out[5]: [1, 2, 3, 42] In [6]: id(l) Out[6]: 1888404847368  在这个例子中，list是可变对象，调用v.</description>
+    </item>
+    
+    <item>
+      <title>ZeroMQ笔记</title>
+      <link>http://liguangsheng.github.io/post/zeromq%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 17 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/zeromq%E7%AC%94%E8%AE%B0/</guid>
+      <description>安装 安装ZeroMQ
+# 下载源代码并解压 wget https://github.com/zeromq/libzmq/releases/download/v4.2.1/zeromq-4.2.1.tar.gz tar xzvf zeromq-4.2.1.tar.gz # 编译安装 cd zeromq-4.2.1 ./configure make sudo make install sudo ldconfig  安装pyzmq
+pip install pyzmq  简介 Request-reply pattern 请求-回复模型 这种模型主要用于从客户端向一个或多个服务实例发送请求，然后等待紧接着对于每个请求的回复 里面又具体分了ZMQ_REQ ZMQ_REP ZMQ_DEALER ZMQ_ROUTER REQ 发送完消息后，必须接收一个回应消息后，才能发送新的消息。 REP当接收消息时，都会返回一个消息。 Publish-subscribe pattern 发布-订阅模式 这种模式主要用于1对多的数据发布（一个发布者，多个订阅者） 里面又具体分了ZMQ_PUB ZMQ_SUB PUB发送消息给所有的SUB。如果此时SUB没有启动，下次启动时会漏掉该消息。 Pipeline pattern 管道模式 这种模式主要用于发布数据到由管道排列的节点上面，数据总是沿着管道流动。每个管道阶段连接了至少一个节点 里面又具体分了ZMQ_PUSH ZMQ_PULL 一个1对N队列的实现，PUSH将数据放入队列，PULL从队列中取出数据。数据会负载均衡的发送给每一个PULL。 Exclusive pair pattern 独立对模式 peer to peer 模式。主要用于进程内部线程间通信 里面又具体分了ZMQ_PAIR 线程间1-to-1队列的实现，采用了lock free实现，所以速度很快。
+示例 ##　Request - Reply
+# zmq_rep.</description>
+    </item>
+    
+    <item>
+      <title>Nginx笔记</title>
+      <link>http://liguangsheng.github.io/post/nginx%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/nginx%E7%AC%94%E8%AE%B0/</guid>
+      <description>CentOS上编译安装Nginx 首先下载nginx的源代码，这里选择的是当前最前的稳定版1.12.2。
+wget http://nginx.org/download/nginx-1.12.2.tar.gz tar xzvf nginx-1.12.2.tar.gz  (可选)接着下载想要额外添加的模块的源代码
+# rtmp 直播支持 git clone https://github.com/arut/nginx-rtmp-module # mp4 流媒体支持 wget http://h264.code-shop.com/download/nginx_mod_h264_streaming-2.2.7.tar.gz tar xzvf nginx_mod_h264_streaming-2.2.7.tar.gz  mp4模块还需要修改一下源代码，注释掉nginx_mod_h264_streaming-2.2.7/src/ngx_http_streaming_module.c这个文件中的第158到161行
+157 /* TODO: Win32 */ 158 //if (r-&amp;gt;zero_in_uri) 159 //{ 160 // return NGX_DECLINED; 161 //}  安装编译必要的依赖包，不同的系统包名不同。
+# ubuntu sudo apt-get install openssl libssl-dev libpcre3 libpcre3-dev zlib1g-dev # centos sudo yum -y install pcre-devel openssl openssl-devel  开始编译和安装
+cd nginx-1.12.2 # 进入nginx源码目录 ./configure --prefix=/usr/local/nginx --with-pcre \ --add-module=.</description>
+    </item>
+    
+    <item>
+      <title>rsync笔记</title>
+      <link>http://liguangsheng.github.io/post/rsync%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/rsync%E7%AC%94%E8%AE%B0/</guid>
+      <description>rsync usage:
+rsync #[OPTION]... SRC DEST rsync [OPTION]... SRC [USER@]host:DEST rsync [OPTION]... [USER@]HOST:SRC DEST rsync [OPTION]... [USER@]HOST::SRC DEST rsync [OPTION]... SRC [USER@]HOST::DEST rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]  对应于以上六种命令格式，rsync有六种不同的工作模式：
+ 拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号&amp;rdquo;:&amp;ldquo;分隔符时就启动这种工作模式。如：rsync -a /data /backup 使用一个远程shell程序(如rsh、ssh)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号&amp;rdquo;:&amp;ldquo;分隔符时启动该模式。如：rsync -avz *.c foo:src 使用一个远程shell程序(如rsh、ssh)来实现将远程机器的内容拷贝到本地机器。当SRC地址路径包含单个冒号&amp;rdquo;:&amp;ldquo;分隔符时启动该模式。如：rsync -avz foo:src/bar /data 从远程rsync服务器中拷贝文件到本地机。当SRC路径信息包含&amp;rdquo;::&amp;ldquo;分隔符时启动该模式。如：rsync -av root@192.168.78.192::www /databack 从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含&amp;rdquo;::&amp;ldquo;分隔符时启动该模式。如：rsync -av /databack root@192.168.78.192::www 列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：rsync -v rsync://192.168.78.192/www  详细参数如下:
+-v, --verbose 详细模式输出 -q, --quiet 精简输出模式 -c, --checksum 打开校验开关，强制对文件传输进行校验 -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD -r, --recursive 对子目录以递归模式处理 -R, --relative 使用相对路径信息 -b, --backup 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。 --backup-dir 将备份文件(如~filename)存放在在目录下。 -suffix=SUFFIX 定义备份文件前缀 -u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件) -l, --links 保留软链结 -L, --copy-links 想对待常规文件一样处理软链结 --copy-unsafe-links 仅仅拷贝指向SRC路径目录树以外的链结 --safe-links 忽略指向SRC路径目录树以外的链结 -H, --hard-links 保留硬链结 -p, --perms 保持文件权限 -o, --owner 保持文件属主信息 -g, --group 保持文件属组信息 -D, --devices 保持设备文件信息 -t, --times 保持文件时间信息 -S, --sparse 对稀疏文件进行特殊处理以节省DST的空间 -n, --dry-run现实哪些文件将被传输 -W, --whole-file 拷贝文件，不进行增量检测 -x, --one-file-system 不要跨越文件系统边界 -B, --block-size=SIZE 检验算法使用的块尺寸，默认是700字节 -e, --rsh=COMMAND 指定使用rsh、ssh方式进行数据同步 --rsync-path=PATH 指定远程服务器上的rsync命令所在路径信息 -C, --cvs-exclude 使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件 --existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件 --delete 删除那些DST中SRC没有的文件 --delete-excluded 同样删除接收端那些被该选项指定排除的文件 --delete-after 传输结束以后再删除 --ignore-errors 及时出现IO错误也进行删除 --max-delete=NUM 最多删除NUM个文件 --partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输 --force 强制删除目录，即使不为空 --numeric-ids 不将数字的用户和组ID匹配为用户名和组名 --timeout=TIME IP超时时间，单位为秒 -I, --ignore-times 不跳过那些有同样的时间和长度的文件 --size-only 当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间 --modify-window=NUM 决定文件是否时间相同时使用的时间戳窗口，默认为0 -T --temp-dir=DIR 在DIR中创建临时文件 --compare-dest=DIR 同样比较DIR中的文件来决定是否需要备份 -P 等同于 --partial --progress 显示备份过程 -z, --compress 对备份的文件在传输时进行压缩处理 --exclude=PATTERN 指定排除不需要传输的文件模式 --include=PATTERN 指定不排除而需要传输的文件模式 --exclude-from=FILE 排除FILE中指定模式的文件 --include-from=FILE 不排除FILE指定模式匹配的文件 --version 打印版本信息 --address 绑定到特定的地址 --config=FILE 指定其他的配置文件，不使用默认的rsyncd.</description>
+    </item>
+    
+    <item>
+      <title>搭建git服务器</title>
+      <link>http://liguangsheng.github.io/post/%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>安装git
+yum install git  添加用户git并切换到git用户来运行git服务
+useradd git passwd git su git  创建相应的ssh目录
+mkdir .ssh &amp;amp;&amp;amp; chmod 700 .ssh touch .ssh/authorized_keys &amp;amp;&amp;amp; chmod 600 .ssh/authorized_keys  切换到一个空的目录来存放git仓库
+mkdir -p /opt/git/project.git cd /opt/git chown -R git:git project.git cd project.git git init --bare  禁用shell登录，将/etc/passwd中的
+git:x:1001:1001:,,,:/home/git:/bin/bash  改为
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell  赋予使用者权限，将授权使用git的ssh公钥收集到~/.ssh/authorizes_keys中
+ 使用git
+git clone git@&amp;lt;server_address&amp;gt;:/opt/git/project.git Cloning into &#39;project&#39;... warning: You appear to have cloned an empty repository.  git clone ssh://&amp;lt;user&amp;gt;@&amp;lt;server&amp;gt;:&amp;lt;port&amp;gt;&amp;lt;path&amp;gt; git clone ssh://root@xxx.</description>
+    </item>
+    
+    <item>
+      <title>编译安装emacs25</title>
+      <link>http://liguangsheng.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85emacs25/</link>
+      <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85emacs25/</guid>
+      <description>下载源码并解压 wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.2.tar.gz tar xzvf emacs-25.2.tar.gz cd emacs-25.2  安装编译依赖 yum install -y gcc gtk2 gtk2-devel libXpm libXpm-devel libtiff libtiff-devel libjpeg-turbo libjpeg-turbo-devel giflib giflib-devel  编译 ./configure --prefix=/usr/local/emacs-25 make make install  make时出现了aclocal-1.5.1 missing的错误，执行autoreconf -f -i后再make。
+make install时出现makeinfo command not found，执行yum install texinfo。</description>
+    </item>
+    
+    <item>
+      <title>linux配置Shadowsocks</title>
+      <link>http://liguangsheng.github.io/post/linux-setup-shadowsocks/</link>
+      <pubDate>Thu, 06 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/linux-setup-shadowsocks/</guid>
+      <description> 安装Shadowsocks pip install shadowsocks  服务端配置 shadowsocks配置文件，shadowsocks.json
+{ &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;, &amp;quot;server_port&amp;quot;:1118, &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;, &amp;quot;local_port&amp;quot;:1080, &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;, &amp;quot;timeout&amp;quot;:300, &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot; }  启动ssserver
+ssserver -c shadowsocks.json -d start  关闭ssserver
+ssserver -d stop  客户端配置 shadowsocks配置文件，/etc/shadowsocks/config.json
+{ &amp;quot;server&amp;quot;:&amp;quot;0.0.0.0&amp;quot;, &amp;quot;server_port&amp;quot;:1118, &amp;quot;local_address&amp;quot;:&amp;quot;127.0.0.1&amp;quot;, &amp;quot;local_port&amp;quot;:1080, &amp;quot;password&amp;quot;:&amp;quot;11181118&amp;quot;, &amp;quot;timeout&amp;quot;:300, &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot; }  启动shadowsocks客户端
+sslocal -c /etc/shadowsocks/config.json -d start  </description>
+    </item>
+    
+    <item>
+      <title>pyenv管理Python版本</title>
+      <link>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</guid>
+      <description>安装 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash  添加以下语句到.bashrc并重新source。
+export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot; eval &amp;quot;$(pyenv init -)&amp;quot; eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;  运行一下pyenv update。
+依赖 编译Python时需要一些依赖。 Ubuntu/Debian:
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils  Fedora/CentOS/RHEL: FIXME: you may need to install xz to build some CPython version
+yum install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel  Mac OS X:</description>
+    </item>
+    
+    <item>
+      <title>VirtualBox克隆虚拟机后重新初始化网卡</title>
+      <link>http://liguangsheng.github.io/post/virtualbox%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E5%8D%A1/</link>
+      <pubDate>Sun, 22 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/virtualbox%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E5%8D%A1/</guid>
+      <description>VirtualBox重新初始化虚拟机后，新虚拟机会重新生成两张不一样的网卡。
+系统会扫描新生成的网卡，添加到/etc/udev/rules.d/70-persistent-net.rules中。删除多余的网卡，只剩下两条，将名称改为eth0和eth1，将ATTR{address}修改为对应的MAC地址。
+cat /etc/udev/rules.d/70-persistent-net.rules # PCI device 0x8086:0x100e (e1000) SUBSYSTEM==&amp;quot;net&amp;quot;, ACTION==&amp;quot;add&amp;quot;, DRIVERS==&amp;quot;?*&amp;quot;, ATTR{address}==&amp;quot;08:00:27:20:2b:d6&amp;quot;, ATTR{type}==&amp;quot;1&amp;quot;, KERNEL==&amp;quot;eth*&amp;quot;, NAME=&amp;quot;eth0&amp;quot; # PCI device 0x8086:0x100e (e1000) SUBSYSTEM==&amp;quot;net&amp;quot;, ACTION==&amp;quot;add&amp;quot;, DRIVERS==&amp;quot;?*&amp;quot;, ATTR{address}==&amp;quot;08:00:27:bc:43:e8&amp;quot;, ATTR{type}==&amp;quot;1&amp;quot;, KERNEL==&amp;quot;eth*&amp;quot;, NAME=&amp;quot;eth1&amp;quot;  在/etc/sysconfig/network-scripts下删除多余的ifcfg-eth*，并建立ifcfg-eth0和ifcfg-eth1。
+cat ifcfg-eth0 DEVICE=eth0 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  cat ifcfg-eth1 DEVICE=eth1 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  重启。</description>
+    </item>
+    
+    <item>
+      <title>MacType与VirtualBox冲突</title>
+      <link>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</guid>
+      <description> MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。
+解决方法 在MacType的配置文件中加入以下节点
+[ExcludeSub] javaw.exe vbox-img.exe VBoxBalloonCtrl.exe VBoxDTrace.exe VBoxExtPackHelperApp.exe VBoxHeadless.exe VBoxManage.exe VBoxNetDHCP.exe VBoxNetNAT.exe VBoxSDL.exe VBoxSVC.exe VBoxTestOGL.exe VBoxWebSrv.exe VirtualBox.exe  </description>
+    </item>
+    
+    <item>
+      <title>MySQL连接次数过多报错</title>
+      <link>http://liguangsheng.github.io/post/mysql%E8%BF%9E%E6%8E%A5%E6%AC%A1%E6%95%B0%E8%BF%87%E5%A4%9A%E6%8A%A5%E9%94%99/</link>
+      <pubDate>Mon, 12 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/mysql%E8%BF%9E%E6%8E%A5%E6%AC%A1%E6%95%B0%E8%BF%87%E5%A4%9A%E6%8A%A5%E9%94%99/</guid>
+      <description> MySQL 连接报错  &amp;ldquo;Host &amp;lsquo;10.7.30.133&amp;rsquo; is blocked because of many connection errors; unblock with &amp;lsquo;mysqladmin flush-hosts&amp;rsquo;&amp;rdquo;
+ 解决方法 增加最大错误连接数 mysql&amp;gt; use mysql; # 查看最大错误连接数 mysql&amp;gt; show variables like &#39;%max_connect_errors%&#39; # 修改最大错误连接数 mysql&amp;gt; set global max_connect_errors = 1000; # 查看修改结果 mysql&amp;gt; show variables like &#39;%max_connect_errors%&#39;  重置计数器 mysql&amp;gt; flush hosts;  或者
+$ mysqladmin flush-hosts  </description>
+    </item>
+    
+    <item>
+      <title>win32实现屏幕找色</title>
+      <link>http://liguangsheng.github.io/post/win32-find-color/</link>
+      <pubDate>Sat, 12 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/win32-find-color/</guid>
+      <description>实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。
+win32中有个函数叫做GetPixel()，这个函数可以用来获取屏幕上某个点的RGB值，用这个函数虽然可以实现我们的目标，但是在目标区域较大的情况下，GetPixel()存在严重的效率问题，找色非！常！慢！
+这里有一种效率比较高的屏幕找色函数的实现，主要步骤是：
+ 使用BitBlt函数将屏幕贴图到内存兼容DC中 使用GetBitmapBits函数将bitmap图片的所有颜色值一次性输入到缓冲区中 将缓冲区中的颜色值与目标颜色进行比对  实现代码如下：
+// 在rect的矩形区域内查找颜色为rgb的像素点 POINT FindColor(RECT rect, DWORD rgb) { HDC ScreenDC = GetDC(NULL); HDC memScreenDC = CreateCompatibleDC(ScreenDC); int width = rect.right - rect.left; int height = rect.bottom - rect.top; HBITMAP hBitmap = CreateCompatibleBitmap(GetDC(NULL), width, height); HGDIOBJ hOldbmp = SelectObject(memScreenDC, hBitmap); BitBlt(memScreenDC, 0, 0, width, height, ScreenDC, rect.left, rect.top, SRCCOPY); SelectObject(memScreenDC, hOldbmp); BYTE *bmpBuffer = new BYTE[width*height * 4]; GetBitmapBits(hBitmap, width*height * 4, bmpBuffer); DeleteObject(hBitmap); DeleteDC(memScreenDC); for (int row = 0; row &amp;lt; height; row++) { for (int col = 0; col &amp;lt; width; col++) { int b = bmpBuffer[row * width * 4 + col * 4]; int g = bmpBuffer[row * width * 4 + col * 4 + 1]; int r = bmpBuffer[row * width * 4 + col * 4 + 2]; if (r == GetRValue(rgb) &amp;amp;&amp;amp; g == GetGValue(rgb) &amp;amp;&amp;amp; b == GetBValue(rgb)) { delete bmpBuffer; return POINT{ col, row }; } } } delete bmpBuffer; return POINT{ -1,-1 }; }  这个函数在1366*768的矩形区域中找色一次耗时大约40ms，效率还算可以。如果需要大量使用，则可以修改代码，不要重复的创建和删除资源，比如创建DC和删除DC，分配缓冲区和回收缓冲区。</description>
     </item>
     
   </channel>
