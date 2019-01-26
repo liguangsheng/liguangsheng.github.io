@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    
+    
+    <title>TCP协议三次握手四次挥手</title>
+    
+
+
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+        <link rel="stylesheet" href="/css/main.css">
+    
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+
+
+    
+
+
+<div class="inner" style="position:relative;">
+  
+  <div class="side-btn"><a href="/" class="back">Home</a></div>
+  
+<div class="blog-post">
+  <h2>TCP协议三次握手四次挥手</h2>
+        
+
+<p><img src="/tcp-handshake.png" alt="tcp-handshake" /></p>
+
+<h2 id="tcp协议的六个标志位">TCP协议的六个标志位</h2>
+
+<ul>
+<li>URG 紧急指针，告诉接收TCP模块紧要指针域指着紧要数据。</li>
+<li>ACK 置1时表示确认号（为合法，为0的时候表示数据段不包含确认信息，确认号被忽略。</li>
+<li>PSH 置1时请求的数据段在接收方得到后就可直接送到应用程序，而不必等到缓冲区满时才传送。</li>
+<li>RST 置1时重建连接。如果接收到RST位时候，通常发生了某些错误。</li>
+<li>SYN 置1时用来发起一个连接。</li>
+<li>FIN 置1时表示发端完成发送任务。用来释放连接，表明发送方已经没有数据发送了。</li>
+</ul>
+
+<h2 id="各个状态的意义">各个状态的意义</h2>
+
+<ul>
+<li>LISTEN - 侦听来自远方TCP端口的连接请求；</li>
+<li>SYN-SENT -在发送连接请求后等待匹配的连接请求；</li>
+<li>SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认；</li>
+<li>ESTABLISHED- 代表一个打开的连接，数据可以传送给用户；</li>
+<li>FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认；</li>
+<li>FIN-WAIT-2 - 从远程TCP等待连接中断请求；</li>
+<li>CLOSE-WAIT - 等待从本地用户发来的连接中断请求；</li>
+<li>CLOSING -等待远程TCP对连接中断的确认；</li>
+<li>LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认；</li>
+<li>TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认；</li>
+<li>CLOSED - 没有任何连接状态；</li>
+</ul>
+
+<h2 id="三次挥手">三次挥手</h2>
+
+<ol>
+<li>client发送数据包，SYN=1,ACK=0,seq=x，状态变为SYN_SEN</li>
+<li>server接收数据包，状态变为SYN_RECV，然后发送数据包SYN=1,ACK=1,ack=x+1,seq=y，</li>
+<li>client接收数据包，状态变为ESTABLISHED，然后发送数据包，SYN=1,ACK=1,ack=y+1，</li>
+<li>server接受数据包，状态变为ESTABLISHED</li>
+</ol>
+
+<h2 id="四次挥手">四次挥手</h2>
+
+<ol>
+<li>主动方发送数据包，FIN=1,ACK=0,seq=x，状态变为FIN_WAIT_1</li>
+<li>被动方接收数据包，状态变为CLOSE_WAIT，然后发送数据包FIN=0,ACK=1,ack=x+1。此时被动关闭方仍然可以发送还没发送完的数据，主动方接收到数据包后，状态变为FIN_WAIT_2，等待被动方继续发送数据（被动方也可以直接发送FIN=1,ACK=1的数据包，主动方会直接从FIN_WAIT_1变为TIME_WAIT）</li>
+<li>被动方发送完数据后，发送数据包FIN=1,ACK=0,seq=y，状态变为LAST_ACK，主动方接收此数据包后，发送数据包FIN=1,ACK=1,ack=y+1，然后状态变为TIME_WAIT，等待2MSL后状态变为CLOSED</li>
+<li>被动发接收数据包，状态变为CLOSED</li>
+</ol>
+
+<h2 id="为什么需要time-wait状态在2msl时间之后才变为closed">为什么需要TIME_WAIT状态在2MSL时间之后才变为CLOSED？</h2>
+
+<p>TCP/IP协议就是这样设计的，是不可避免的。主要有两个原因:
+1）可靠地实现TCP全双工连接的终止</p>
+
+<p>TCP协议在关闭连接的四次握手过程中，最终的ACK是由主动关闭连接的一端（后面统称A端）发出的，如果这个ACK丢失，对方（后面统称B端）将重发出最终的FIN，因此A端必须维护状态信息（TIME_WAIT）允许它重发最终的ACK。如果A端不维持TIME_WAIT状态，而是处于CLOSED 状态，那么A端将响应RST分节，B端收到后将此分节解释成一个错误（在java中会抛出connection reset的SocketException)。</p>
+
+<p>因而，要实现TCP全双工连接的正常终止，必须处理终止过程中四个分节任何一个分节的丢失情况，主动关闭连接的A端必须维持TIME_WAIT状态 。</p>
+
+<p>2）允许老的重复分节在网络中消逝</p>
+
+<p>TCP分节可能由于路由器异常而“迷途”，在迷途期间，TCP发送端可能因确认超时而重发这个分节，迷途的分节在路由器修复后也会被送到最终目的地，这个迟到的迷途分节到达时可能会引起问题。在关闭“前一个连接”之后，马上又重新建立起一个相同的IP和端口之间的“新连接”，“前一个连接”的迷途重复分组在“前一个连接”终止后到达，而被“新连接”收到了。为了避免这个情况，TCP协议不允许处于TIME_WAIT状态的连接启动一个新的可用连接，因为TIME_WAIT状态持续2MSL，就可以保证当成功建立一个新TCP连接的时候，来自旧连接重复分组已经在网络中消逝。</p>
+
+<h2 id="半连接与syn攻击">半连接与SYN攻击</h2>
+
+<p>在建立TCP连接的三次握手中，前两个步骤完成后，此时server像client发送ack包后，等待client的ack包，这种连接状态叫做半连接，server会将这个半连接加入到队列中，不停的重复发送ack包，直到超时才将这个半连接从队列中删除。<strong>SYN攻击就是通过发送大量的半连接，并配合假IP来欺骗server端，消耗server端的资源</strong>。</p>
+
+<h3 id="检测syn攻击">检测SYN攻击</h3>
+
+<pre><code>
+netstat -n -p TCP | grep SYN_RECV
+
+</code></pre>
+
+<p>通过netstat查看tcp连接信息，如果有大量连接处于SYN_RECV状态，并且IP随机，则应该注意可能是SYN攻击。</p>
+
+<h3 id="syn攻击防范">SYN攻击防范</h3>
+
+<p>SynAttackProtect保护机制、SYN cookies技术、增加最大半连接和缩短超时时间等</p>
+
+<h2 id="大量time-wait">大量TIME_WAIT</h2>
+
+<pre><code>
+netstat -n -p TCP | grep SYN_RECV | wc -l
+
+</code></pre>
+
+<p>如果出现大量TIME_WAIT状态的连接，是因为关闭连接时TIME_WAIT还要存在2MSL时间。解决办法是修改系统配置，快速回收TIME_WAIT的连接。</p>
+
+<p>修改/etc/sysctl.conf</p>
+
+<pre><code>
+#对于一个新建连接，内核要发送多少个 SYN 连接请求才决定放弃,不应该大于255，默认值是5，对应于180秒左右时间   
+net.ipv4.tcp_syn_retries=2  
+#net.ipv4.tcp_synack_retries=2  
+#表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为300秒  
+net.ipv4.tcp_keepalive_time=1200  
+net.ipv4.tcp_orphan_retries=3  
+#表示如果套接字由本端要求关闭，这个参数决定了它保持在FIN-WAIT-2状态的时间  
+net.ipv4.tcp_fin_timeout=30    
+#表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。  
+net.ipv4.tcp_max_syn_backlog = 4096  
+#表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭  
+net.ipv4.tcp_syncookies = 1  
+  
+#表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭  
+net.ipv4.tcp_tw_reuse = 1  
+#表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭  
+net.ipv4.tcp_tw_recycle = 1  
+  
+##减少超时前的探测次数   
+net.ipv4.tcp_keepalive_probes=5   
+##优化网络设备接收队列   
+net.core.netdev_max_backlog=3000   
+</code></pre>
+
+<h2 id="大量close-wait">大量CLOSE_WAIT</h2>
+
+<p>出现大量CLOSE_WAIT的原因在于代码中，当主动方发起关闭连接后，被动方仍然还在这个连接上读或者写数据，被动方一直没有关闭连接，才会使主动方停滞在TIME_WAIT状态。</p>
+
+<p>解决办法就是检查代码，在主动方发起关闭连接后，不要无限制的继续读写这个连接，及时关闭。</p>
+
+<p>golang写两个例子测试一下：</p>
+
+<pre><code class="language-go">
+// 这是client/main.go，client会发起连接并在3秒后关闭
+
+package main
+
+import (
+   &quot;fmt&quot;
+   &quot;net&quot;
+   &quot;time&quot;
+)
+
+func check(err error) {
+   if err != nil {
+      panic(err)
+   }
+}
+
+func handle(conn net.Conn) {
+   for {
+      var buffer = make([]byte, 256)
+      conn.Read(buffer)
+      fmt.Println(string(buffer))
+   }
+}
+
+func main() {
+   client, err := net.Dial(&quot;tcp&quot;, &quot;:8818&quot;)
+   check(err)
+   client.Write([]byte(&quot;Connect success&quot;))
+   time.Sleep(time.Second * 3)
+   client.Close()
+}
+</code></pre>
+
+<pre><code class="language-go">
+// server/main.go
+
+package main
+
+import (
+   &quot;net&quot;
+   &quot;fmt&quot;
+)
+
+func check(err error) {
+   if err != nil {
+      panic(err)
+   }
+}
+
+func handle(conn net.Conn) {
+   for {
+      var buffer = make([]byte, 256)
+      n, _ := conn.Read(buffer)
+      if n &gt; 0 {
+         fmt.Println(string(buffer))
+      }
+   }
+}
+
+func main() {
+   server, err := net.Listen(&quot;tcp&quot;, &quot;:8818&quot;)
+   check(err)
+   for {
+      conn, err := server.Accept()
+      check(err)
+      go handle(conn)
+   }
+}
+</code></pre>
+
+<p>注意第18行，我们刻意忽略了在已经关闭的连接上的错误检查，client关闭后运行<code>netstat -n -p TCP | grep :8818</code>检查连接状态</p>
+
+<pre><code>
+λ netstat -n -p TCP | grep :8818
+
+  TCP 127.0.0.1:8818 127.0.0.1:12365 CLOSE_WAIT
+
+  TCP 127.0.0.1:12365 127.0.0.1:8818 FIN_WAIT_2
+
+</code></pre>
+
+<p>可以看到，这个TCP连接处于CLOSE_WAIT的FIN_WAIT_2的状态，这是主动方关闭了连接，但是被动方还在死循环中不停的读，没有关闭连接导致的，这个连接会一直存直到超时</p>
+
+<p>接下来改一改server的代码，在读到EOF时，会产生一个EOF的error，此时server主动的关闭这个连接</p>
+
+<pre><code class="language-go">
+func handle(conn net.Conn) {
+   for {
+      var buffer = make([]byte, 256)
+      n, err := conn.Read(buffer)
+      if err != nil {
+         conn.Close()
+      }
+      if n &gt; 0 {
+         fmt.Println(string(buffer))
+      }
+   }
+}
+
+</code></pre>
+
+<pre><code>
+λ netstat -n -p TCP | grep :8818
+
+  TCP 127.0.0.1:12584 127.0.0.1:8818 TIME_WAIT
+
+</code></pre>
+
+<p>结果顺利的进入了TIME_WAIT状态，这个状态在2MSL后变为CLOSED状态。</p>
+
+  </div>
+
+<footer>
+  <hr>
+  <small style="font-size:16px;float:right;margin:0 1rem;">
+    &copy; 2019 <a href="https://github.com/liguangsheng">李广胜.</a>
+    
+  </small>
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=%2a%2a%2a%2a"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', '****');
+</script>
+
+
+
+<script>
+ (function(){
+  var seriesA = document.getElementsByTagName("a");
+  seriesA = Array.from(seriesA).filter(x =>x.getAttribute("data-series"));
+  if(seriesA.length){
+    var nameSeries = {}
+    seriesA.forEach(x =>{
+      var xdata = x.getAttribute("data-series")
+      if(nameSeries[xdata]){
+        nameSeries[xdata].push(x)
+      }else{
+        nameSeries[xdata] = [x]
+      }
+    })
+  }
+
+  function createE(){
+    var detailsArr = [] 
+    var postPosArr = [] 
+    for(let i in nameSeries){
+      var dcreateE = document.createElement("details")
+      var screateE = document.createElement("summary")
+      screateE.textContent = i;
+      var inner = screateE.outerHTML + "<br >" 
+
+      nameSeries[i].forEach(x =>{
+        inner += x.outerHTML
+        x.parentElement.style.display = "none"
+      })
+      postPosArr.push(nameSeries[i][0])
+      dcreateE.innerHTML = inner
+      detailsArr.push(dcreateE)
+    }
+    console.info(postPosArr)
+    console.log(detailsArr[0])
+    postPosArr.forEach(a =>{
+      a.parentElement.style.display = "block"
+      a.outerHTML = detailsArr.shift().outerHTML
+    })
+  }
+  createE()
+ })()
+</script>
+
+
+</body>
+
+</html>

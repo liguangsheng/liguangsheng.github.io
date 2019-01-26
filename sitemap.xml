@@ -3,12 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://liguangsheng.github.io/about/</loc>
+    <lastmod>2019-01-26T16:19:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/tcp-handshake/</loc>
+    <lastmod>2019-01-26T16:19:20+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://liguangsheng.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://liguangsheng.github.io/</loc>
+    <lastmod>2019-01-26T16:19:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/post/</loc>
+    <lastmod>2019-01-26T16:19:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
