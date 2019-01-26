@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="generator" content="Hugo 0.54-DEV" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-language" content="en-us" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1, user-scalable=no">
+    
+    
+    <title>Li Guangsheng</title>
+    
+
+
+    
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="/css/home.css">
+
+    
+    
+</head>
+
+
+<body>
+    <script>
+        window.addEventListener("resize", resizeThrottler, false);
+
+        var resizeTimeout;
+        function resizeThrottler() {
+        
+        if ( !resizeTimeout ) {
+            resizeTimeout = setTimeout(function() {
+            resizeTimeout = null;
+            actualResizeHandler();
+        
+            
+            }, 66);
+        }
+        }
+        actualResizeHandler()
+        function actualResizeHandler() {
+                if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent))
+                {
+                    document.body.classList.add('mobile');
+                }else{
+                    document.body.classList.remove('mobile');  
+                }
+        }</script>
+    
+    <nav class="navbar navbar-default navbar-fixed-top" style="opacity: .9" role="navigation">
+        <div class="container-fluid">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="big-icon icon-bar"></span>
+                    <span class="big-icon icon-bar"></span>
+                    <span class="big-icon icon-bar"></span>
+
+                </button>
+                <a class="navbar-brand" href="/">Li Guangsheng</a>
+            </div>
+
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: auto;">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        <li class="active"><a class="nav-item nav-link" href="/">Home</a></li>
+                        <li><a class="nav-item nav-link" href="https://github.com/liguangsheng"
+                                target="_blank">GitHub</a></li>
+                        <li></li>
+                        <li class=""><a class="nav-item nav-link" href="/about/">About</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+
+    
+    
+    
+
+
+  <div class="outer">
+  <ul class="list-group">
+    
+  </ul>
+
+
+<footer>
+  <hr>
+  <small style="font-size:16px;float:right;margin:0 1rem;">
+    &copy; 2019 <a href="https://github.com/liguangsheng">李广胜.</a>
+    
+  </small>
+</footer>
+</div> 
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=%2a%2a%2a%2a"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', '****');
+</script>
+
+
+
+<script>
+ (function(){
+  var seriesA = document.getElementsByTagName("a");
+  seriesA = Array.from(seriesA).filter(x =>x.getAttribute("data-series"));
+  if(seriesA.length){
+    var nameSeries = {}
+    seriesA.forEach(x =>{
+      var xdata = x.getAttribute("data-series")
+      if(nameSeries[xdata]){
+        nameSeries[xdata].push(x)
+      }else{
+        nameSeries[xdata] = [x]
+      }
+    })
+  }
+
+  function createE(){
+    var detailsArr = [] 
+    var postPosArr = [] 
+    for(let i in nameSeries){
+      var dcreateE = document.createElement("details")
+      var screateE = document.createElement("summary")
+      screateE.textContent = i;
+      var inner = screateE.outerHTML + "<br >" 
+
+      nameSeries[i].forEach(x =>{
+        inner += x.outerHTML
+        x.parentElement.style.display = "none"
+      })
+      postPosArr.push(nameSeries[i][0])
+      dcreateE.innerHTML = inner
+      detailsArr.push(dcreateE)
+    }
+    console.info(postPosArr)
+    console.log(detailsArr[0])
+    postPosArr.forEach(a =>{
+      a.parentElement.style.display = "block"
+      a.outerHTML = detailsArr.shift().outerHTML
+    })
+  }
+  createE()
+ })()
+</script>
+
+
+</body>
+
+</html>

@@ -1,6 +1,0 @@
-#+TITLE: 正则表达式速查
-#+DATE: 2016-12-22
-
-**来源于网络**
-
-[[regex][assets/regex.png]]
