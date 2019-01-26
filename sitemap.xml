@@ -83,19 +83,19 @@
   </url>
   
   <url>
-    <loc>http://liguangsheng.github.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://liguangsheng.github.io/tags/cc/</loc>
+    <loc>http://liguangsheng.github.io/tags/c/</loc>
     <lastmod>2019-01-26T20:02:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>http://liguangsheng.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://liguangsheng.github.io/tags/centos/</loc>
-    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -108,6 +108,12 @@
   <url>
     <loc>http://liguangsheng.github.io/tags/close_wait/</loc>
     <lastmod>2019-01-26T20:02:14+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://liguangsheng.github.io/tags/gil/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -136,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://liguangsheng.github.io/tags/mactype-virtualbox/</loc>
+    <loc>http://liguangsheng.github.io/tags/mactype/</loc>
     <lastmod>2017-06-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -148,7 +154,7 @@
   </url>
   
   <url>
-    <loc>http://liguangsheng.github.io/tags/nginx-centos/</loc>
+    <loc>http://liguangsheng.github.io/tags/nginx/</loc>
     <lastmod>2017-11-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -160,19 +166,13 @@
   </url>
   
   <url>
+    <loc>http://liguangsheng.github.io/tags/pyenv/</loc>
+    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://liguangsheng.github.io/tags/python/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://liguangsheng.github.io/tags/python-gil/</loc>
-    <lastmod>2019-01-26T20:13:28+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://liguangsheng.github.io/tags/python-pyenv/</loc>
     <lastmod>2019-01-26T20:13:28+08:00</lastmod>
     <priority>0</priority>
   </url>

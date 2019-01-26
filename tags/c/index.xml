@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/c/</link>
+    <description>Recent content in C on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 12 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>win32实现屏幕找色</title>
+      <link>http://liguangsheng.github.io/post/win32-find-color/</link>
+      <pubDate>Sat, 12 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/win32-find-color/</guid>
+      <description>实现屏幕找色功能的基本思路是将目标区域内的像素颜色，逐个与目标颜色比对，直到找到为止。
+win32中有个函数叫做GetPixel()，这个函数可以用来获取屏幕上某个点的RGB值，用这个函数虽然可以实现我们的目标，但是在目标区域较大的情况下，GetPixel()存在严重的效率问题，找色非！常！慢！
+这里有一种效率比较高的屏幕找色函数的实现，主要步骤是：
+ 使用BitBlt函数将屏幕贴图到内存兼容DC中 使用GetBitmapBits函数将bitmap图片的所有颜色值一次性输入到缓冲区中 将缓冲区中的颜色值与目标颜色进行比对  实现代码如下：
+// 在rect的矩形区域内查找颜色为rgb的像素点 POINT FindColor(RECT rect, DWORD rgb) { HDC ScreenDC = GetDC(NULL); HDC memScreenDC = CreateCompatibleDC(ScreenDC); int width = rect.right - rect.left; int height = rect.bottom - rect.top; HBITMAP hBitmap = CreateCompatibleBitmap(GetDC(NULL), width, height); HGDIOBJ hOldbmp = SelectObject(memScreenDC, hBitmap); BitBlt(memScreenDC, 0, 0, width, height, ScreenDC, rect.left, rect.top, SRCCOPY); SelectObject(memScreenDC, hOldbmp); BYTE *bmpBuffer = new BYTE[width*height * 4]; GetBitmapBits(hBitmap, width*height * 4, bmpBuffer); DeleteObject(hBitmap); DeleteDC(memScreenDC); for (int row = 0; row &amp;lt; height; row++) { for (int col = 0; col &amp;lt; width; col++) { int b = bmpBuffer[row * width * 4 + col * 4]; int g = bmpBuffer[row * width * 4 + col * 4 + 1]; int r = bmpBuffer[row * width * 4 + col * 4 + 2]; if (r == GetRValue(rgb) &amp;amp;&amp;amp; g == GetGValue(rgb) &amp;amp;&amp;amp; b == GetBValue(rgb)) { delete bmpBuffer; return POINT{ col, row }; } } } delete bmpBuffer; return POINT{ -1,-1 }; }  这个函数在1366*768的矩形区域中找色一次耗时大约40ms，效率还算可以。如果需要大量使用，则可以修改代码，不要重复的创建和删除资源，比如创建DC和删除DC，分配缓冲区和回收缓冲区。</description>
+    </item>
+    
+  </channel>
+</rss>

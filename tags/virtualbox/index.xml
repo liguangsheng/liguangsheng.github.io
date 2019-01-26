@@ -23,5 +23,16 @@ cat /etc/udev/rules.d/70-persistent-net.rules # PCI device 0x8086:0x100e (e1000)
 cat ifcfg-eth0 DEVICE=eth0 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  cat ifcfg-eth1 DEVICE=eth1 BOOTPROTO=dhcp IPV6INIT=yes NM_CONTROLLED=no ONBOOT=yes TYPE=Ethernet USERCTL=no PEERDNS=yes  重启。</description>
     </item>
     
+    <item>
+      <title>MacType与VirtualBox冲突</title>
+      <link>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</link>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/mactype%E4%B8%8Evirtualbox%E5%86%B2%E7%AA%81/</guid>
+      <description> MacType渲染字体会与VirtualBox冲突导致虚拟机不能启动。
+解决方法 在MacType的配置文件中加入以下节点
+[ExcludeSub] javaw.exe vbox-img.exe VBoxBalloonCtrl.exe VBoxDTrace.exe VBoxExtPackHelperApp.exe VBoxHeadless.exe VBoxManage.exe VBoxNetDHCP.exe VBoxNetNAT.exe VBoxSDL.exe VBoxSVC.exe VBoxTestOGL.exe VBoxWebSrv.exe VirtualBox.exe  </description>
+    </item>
+    
   </channel>
 </rss>

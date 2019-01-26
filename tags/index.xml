@@ -12,18 +12,18 @@
     
     
     <item>
-      <title>Cc</title>
-      <link>http://liguangsheng.github.io/tags/cc/</link>
+      <title>C</title>
+      <link>http://liguangsheng.github.io/tags/c/</link>
       <pubDate>Sat, 12 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://liguangsheng.github.io/tags/cc/</guid>
+      <guid>http://liguangsheng.github.io/tags/c/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Centos</title>
       <link>http://liguangsheng.github.io/tags/centos/</link>
-      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://liguangsheng.github.io/tags/centos/</guid>
       <description></description>
@@ -44,6 +44,15 @@
       <pubDate>Sat, 26 Jan 2019 16:19:20 +0800</pubDate>
       
       <guid>http://liguangsheng.github.io/tags/close_wait/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gil</title>
+      <link>http://liguangsheng.github.io/tags/gil/</link>
+      <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/tags/gil/</guid>
       <description></description>
     </item>
     
@@ -75,11 +84,11 @@
     </item>
     
     <item>
-      <title>Mactype Virtualbox</title>
-      <link>http://liguangsheng.github.io/tags/mactype-virtualbox/</link>
+      <title>Mactype</title>
+      <link>http://liguangsheng.github.io/tags/mactype/</link>
       <pubDate>Thu, 12 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://liguangsheng.github.io/tags/mactype-virtualbox/</guid>
+      <guid>http://liguangsheng.github.io/tags/mactype/</guid>
       <description></description>
     </item>
     
@@ -93,11 +102,20 @@
     </item>
     
     <item>
-      <title>Nginx Centos</title>
-      <link>http://liguangsheng.github.io/tags/nginx-centos/</link>
+      <title>Nginx</title>
+      <link>http://liguangsheng.github.io/tags/nginx/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://liguangsheng.github.io/tags/nginx-centos/</guid>
+      <guid>http://liguangsheng.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pyenv</title>
+      <link>http://liguangsheng.github.io/tags/pyenv/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/tags/pyenv/</guid>
       <description></description>
     </item>
     
@@ -107,24 +125,6 @@
       <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://liguangsheng.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python Gil</title>
-      <link>http://liguangsheng.github.io/tags/python-gil/</link>
-      <pubDate>Fri, 11 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://liguangsheng.github.io/tags/python-gil/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python Pyenv</title>
-      <link>http://liguangsheng.github.io/tags/python-pyenv/</link>
-      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://liguangsheng.github.io/tags/python-pyenv/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pyenv on Li Guangsheng</title>
+    <link>http://liguangsheng.github.io/tags/pyenv/</link>
+    <description>Recent content in Pyenv on Li Guangsheng</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://liguangsheng.github.io/tags/pyenv/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>pyenv管理Python版本</title>
+      <link>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://liguangsheng.github.io/post/manage-python-version-with-pyenv/</guid>
+      <description>安装 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash  添加以下语句到.bashrc并重新source。
+export PATH=&amp;quot;/home/&amp;lt;user&amp;gt;/.pyenv/bin:$PATH&amp;quot; eval &amp;quot;$(pyenv init -)&amp;quot; eval &amp;quot;$(pyenv virtualenv-init -)&amp;quot;  运行一下pyenv update。
+依赖 编译Python时需要一些依赖。 Ubuntu/Debian:
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils  Fedora/CentOS/RHEL: FIXME: you may need to install xz to build some CPython version
+yum install zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel  Mac OS X:</description>
+    </item>
+    
+  </channel>
+</rss>
