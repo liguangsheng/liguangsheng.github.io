@@ -145,9 +145,15 @@ netstat -n -p TCP | grep SYN_RECV
 
 <p>SynAttackProtect保护机制、SYN cookies技术、增加最大半连接和缩短超时时间等</p>
 
+<p>修改/etc/sysctl.conf，开启syncookies</p>
+
+<pre><code class="language-conf">#表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭  
+net.ipv4.tcp_syncookies = 1
+</code></pre>
+
 <h2 id="大量time-wait">大量TIME_WAIT</h2>
 
-<pre><code>
+<pre><code class="language-shell">
 netstat -n -p TCP | grep SYN_RECV | wc -l
 
 </code></pre>
@@ -156,7 +162,7 @@ netstat -n -p TCP | grep SYN_RECV | wc -l
 
 <p>修改/etc/sysctl.conf</p>
 
-<pre><code>
+<pre><code class="language-conf">
 #对于一个新建连接，内核要发送多少个 SYN 连接请求才决定放弃,不应该大于255，默认值是5，对应于180秒左右时间   
 net.ipv4.tcp_syn_retries=2  
 #net.ipv4.tcp_synack_retries=2  
@@ -169,12 +175,10 @@ net.ipv4.tcp_fin_timeout=30
 net.ipv4.tcp_max_syn_backlog = 4096  
 #表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭  
 net.ipv4.tcp_syncookies = 1  
-  
 #表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭  
 net.ipv4.tcp_tw_reuse = 1  
 #表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭  
 net.ipv4.tcp_tw_recycle = 1  
-  
 ##减少超时前的探测次数   
 net.ipv4.tcp_keepalive_probes=5   
 ##优化网络设备接收队列   
@@ -311,7 +315,7 @@ func handle(conn net.Conn) {
   </br>
   <small style="font-size:14px;float:right;margin:0 1rem;">
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> pv / <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> uv</span>  
+    <span id="busuanzi_container_site_pv">访问量：<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> pv </span>  
   </small>
 
   
